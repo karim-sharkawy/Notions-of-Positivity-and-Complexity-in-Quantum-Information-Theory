@@ -1,7 +1,3 @@
-# Yes-math
-for math project :))
-# This code was made by Raja Darshini of Purdue University, NOT me. I'm just practicing GitHub right now
-
 import random # Generates pseudo-random numbers
 from sympy import symbols, solve, And, Eq
 from sympy.solvers.inequalities import reduce_rational_inequalities
@@ -10,8 +6,8 @@ from sympy import symbols
 from sympy import sympify as S, Symbol
 from sympy.solvers.inequalities import reduce_inequalities
 
-def get_random_number():
-    return random.randrange(9)
+def get_random_number(): # what does the return function do? It seems pointless
+    return random.randrange(9) # why is this randrange and not randint?
 
 def is_valid(matrix, rows, cols, row, col, num):
     # Check row condition
