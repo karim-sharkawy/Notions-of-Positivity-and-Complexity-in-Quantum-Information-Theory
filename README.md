@@ -1,6 +1,6 @@
-#this code was creating by Raja Darshini of Purdue Univeristy
+# This code was creating by Raja Darshini of Purdue Univeristy
 
-# Generates pseudo-random numbers
+#Generates pseudo-random numbers
 import random
 from sympy import symbols, solve, And, Eq
 from sympy.solvers.inequalities import reduce_rational_inequalities
