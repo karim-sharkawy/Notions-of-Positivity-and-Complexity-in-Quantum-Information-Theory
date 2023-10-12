@@ -5,6 +5,8 @@ from scipy import linalg
 # create the matrix with random numbers
 n = random.randint(2,10) # there's a diff between random and np.random
 A = np.random.randint(10, size = (n,n)) #this is a square matrix that chooses random numbers between 0-9 (inclusive)
+pos_matrices: []
+neg_matrices: []
 print(A)
 
 def positive_req(): #checks for positivity (semidefinite)
@@ -12,14 +14,19 @@ def positive_req(): #checks for positivity (semidefinite)
     print(la)
     is_semidefinite = True #this is a flag
     for i in la:
-        if i < 0:
+        if i < 0: 
             is_semidefinite = False
             break
     if is_semidefinite:
         print("This is semidefinite")
     else:
         print("Oh no, this is not semidefinite")
-positive_req()
+    if A is is_semidefinite: # change this garbage code so it makes sense
+        pos_matrices.append(A)
+    if A is not is_semidefinite: # change this garbage code so it makes sense
+        neg_matrices.append(A)
+        
+positive_req() #make sure to add an .append for positive and negative so we can see difference between them
 
 def symmetric_req(): # makes sure the matrix is symmetric
     if np.array_equal(A.T,A): #returns boolean
@@ -27,6 +34,3 @@ def symmetric_req(): # makes sure the matrix is symmetric
     else:
         print("Matrix is not symmetric")
 symmetric_req()
-
-
-
