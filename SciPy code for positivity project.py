@@ -3,19 +3,22 @@ import numpy as np
 from scipy import linalg
 
 # create the matrix with random numbers
-n = 2 # figure out how to make this any number
+n = random.randint(2,10) # there's a diff between random and np.random
 A = np.random.randint(10, size = (n,n)) #this is a square matrix that chooses random numbers between 0-9 (inclusive)
+print(A)
 
 def positive_req(): #checks for positivity (semidefinite)
     la, v = linalg.eig(A)
     print(la)
+    is_semidefinite = True #this is a flag
     for i in la:
         if i < 0:
-            print("Oh no! This is not semidefinite")
+            is_semidefinite = False
             break
-        else:
-            print("This is semidefinite :)")
-            # look into flags!!
+    if is_semidefinite:
+        print("This is semidefinite")
+    else:
+        print("Oh no, this is not semidefinite")
 positive_req()
 
 def symmetric_req(): # makes sure the matrix is symmetric
