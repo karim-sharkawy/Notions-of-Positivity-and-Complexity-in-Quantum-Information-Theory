@@ -19,11 +19,9 @@ def positive_req(): #checks for positivity (semidefinite)
             break
     if is_semidefinite:
         print("This is semidefinite")
+        pos_matrices.append(A)
     else:
         print("Oh no, this is not semidefinite")
-    if A is is_semidefinite: # change this garbage code so it makes sense
-        pos_matrices.append(A)
-    if A is not is_semidefinite: # change this garbage code so it makes sense
         neg_matrices.append(A)
         
 positive_req() #make sure to add an .append for positive and negative so we can see difference between them
@@ -34,3 +32,6 @@ def symmetric_req(): # makes sure the matrix is symmetric
     else:
         print("Matrix is not symmetric")
 symmetric_req()
+
+
+
