@@ -1,3 +1,5 @@
+# This code was created by Darshini Rajamani of Purdue University
+
 import random # Generates pseudo-random numbers
 
 def get_random_number():
