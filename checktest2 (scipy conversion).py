@@ -21,12 +21,6 @@ matrix = [x,
           z,
           w]
 
-mat = [1, 1, 1, 1]
-a = mat[0]
-b = mat[1]
-c = mat[2]
-d = mat[3]
-
 for_A_ub = [[1,0,0,0],
             [0,1,0,0],
             [0,0,1,0],
@@ -49,7 +43,7 @@ solve_for = [[min(matrix[0][2],matrix[0][3])],
 
 
 # Solve for inequalities with scipy.optimize.linprog
-result = linprog(c=mat, A_ub = for_A_ub, b_ub = solve_for, bounds = None)
+result = linprog(c=[1,1,1,1], A_ub = for_A_ub, b_ub = solve_for, bounds = None)
 
 # Print whether the inequality solving was successful (output of the linprog function)
 print(result)
