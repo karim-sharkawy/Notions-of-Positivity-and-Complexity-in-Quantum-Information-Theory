@@ -1,5 +1,9 @@
 #This code was worked on and edited by Luke Luschwitz and Karim El-Sharkawy
 
+# Reference images from Professor Sinclair
+# https://cdn.discordapp.com/attachments/993798931777585153/1165299134165696522/image0.jpg?ex=65465863&is=6533e363&hm=6a59d0a154f6bfa745b5194ccad740a781b196437bcee525abc6a2cf0768779d&
+# https://cdn.discordapp.com/attachments/993798931777585153/1165291718418112603/IMG_7540.jpg?ex=6546517b&is=6533dc7b&hm=01582d955a387eac71189654067dff37c5b3988983e7b475c129e27bc427c6ca&
+
 from scipy.optimize import linprog
 
 # The points in P(2,2) that were mapped from E(2,2).
