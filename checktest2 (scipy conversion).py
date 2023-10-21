@@ -34,7 +34,7 @@ print("\n")
 for_A_ub = [[1,0,0,0],
             [0,1,0,0],
             [0,0,1,0],
-            [0,0,0,1]
+            [0,0,0,1],
             [-1,0,0,0],
             [0,-1,0,0],
             [0,0,-1,0],
@@ -42,28 +42,14 @@ for_A_ub = [[1,0,0,0],
 
 A_eq = ((a+b),(c+d)) #original ineq13
 
-solve_for = [min[matrix[0][2],matrix[0][3]],
-             [min],
-             [],
-             [],
-             [],
-             [],
-             [],
-             ]
-
-#ineq1 = new_matrix[1][0] + new_matrix[1][2] >= 0
-#ineq2 = new_matrix[2][0] + new_matrix[2][2] >= 0
-#ineq3 = new_matrix[3][0] + new_matrix[3][2] >= 0
-#ineq4 = new_matrix[1][0] + new_matrix[1][3] >= 0
-#ineq5 = new_matrix[2][0] + new_matrix[2][3] >= 0
-#ineq6 = new_matrix[3][0] + new_matrix[3][3] >= 0
-#ineq7 = new_matrix[1][1] + new_matrix[1][2] >= 0
-#ineq8 = new_matrix[2][1] + new_matrix[2][2] >= 0
-#ineq9 = new_matrix[3][1] + new_matrix[3][2] >= 0
-#ineq10 = new_matrix[1][1] + new_matrix[1][3] >= 0
-#ineq11 = new_matrix[2][1] + new_matrix[2][3] >= 0
-#ineq12 = new_matrix[3][1] + new_matrix[3][3] >= 0
-#ineq13 = Eq(a + b, c + d)
+solve_for = [[min(matrix[0][2],matrix[0][3])],
+             [min(matrix[1][2], matrix[1][3])],
+             [min(matrix[2][2], matrix[2][3])],
+             [min(matrix[3][2], matrix[3][3])],
+             [-max(-matrix[0][0], -matrix[0][1])],
+             [-max(-matrix[1][0], -matrix[1][1])],
+             [-max(-matrix[2][0], -matrix[2][1])],
+             [-max(-matrix[3][0], -matrix[3][1])]]
 
 
 # Now use reduce_inequalities with SymPy expressions
@@ -94,11 +80,10 @@ solve_for = [min[matrix[0][2],matrix[0][3]],
 #print("Result 12:", result12)
 #ineq_combined = And(ineq1, ineq2, ineq3, ineq4, ineq5, ineq6, ineq7, ineq8, ineq9, ineq10, ineq11, ineq12, ineq13) # what is And?
 #print(type(ineq_combined))
-b_ub = [0, 0, 0, 0, 0, 0, 0, 0]
 bnds = [0, 0, 0, 0]
 
 # Now use reduce_inequalities with the combined inequality
-result = linprog(c=mat, A_ub = for_A_ub, b_ub = b_ub, bounds = bnds)
+result = linprog(c=mat, A_ub = for_A_ub, b_ub = solve_for, bounds = None)
 
 print("Result:", result)
 
