@@ -1,11 +1,28 @@
 # This code was created by Darshini Rajamani of Purdue University
 
-import random # Generates pseudo-random numbers
+import random;
 
 def get_random_number():
-    return random.randrange(10)
+    return random.randint(-9, 9)
 
 def is_valid(matrix, rows, cols, row, col, num):
+    # initial assigment to check validation
+    matrix[row][col] = num
+
+    if row >= 2 and col == cols - 1:  # checking validatation least after filling two rows
+        for i in range(cols):
+            # check if x + w < 0
+            if matrix[0][i] is not None and matrix[3][i] is not None:
+                if matrix[0][i] + matrix[3][i] < 0:
+                    matrix[row][col] = None  # Undo the initial assignment
+                    return False
+
+            # check if y + z < 0
+            if matrix[1][i] is not None and matrix[2][i] is not None:
+                if matrix[1][i] + matrix[2][i] < 0:
+                    matrix[row][col] = None  # Undo the initial assignment
+                    return False
+    
     # Check row condition
     if col == 3:
         if sum(matrix[row][:2]) != num + matrix[row][2]:
@@ -29,7 +46,7 @@ def is_valid(matrix, rows, cols, row, col, num):
             return False
         matrix[row][col] = None
 
-    # Check that only one digit can be 0 in a row
+    # Check that only one digit can be 0 in a row (to prevent 0,0,0,0) in a row)
     if col == 3:
         zero_count = sum([1 for x in matrix[row] if x == 0])
         if zero_count > 1:
@@ -39,18 +56,18 @@ def is_valid(matrix, rows, cols, row, col, num):
         for i in range(cols):
             if matrix[1][i] + matrix[2][i] != matrix[0][i] + matrix[3][i]:
                 return False
-
+    
+    matrix[row][col] = None
     return True
-
 
 def create_matrix(rows, cols):
     matrix = [[None for _ in range(cols)] for _ in range(rows)]
 
-    def backtrack(row, col):
+    def backtrack(row, col):  # to check for complete and valid solution
         if row == rows:
             return True
 
-        nums = list(range(10))
+        nums = [i for i in range(-9, 10)]  # range [-9, 10)
         random.shuffle(nums)
 
         for num in nums:
@@ -69,7 +86,7 @@ def create_matrix(rows, cols):
         matrix[row][col] = None
         return False
 
-    backtrack(0, 0)
+    backtrack(0, 0)  # recursion
 
     return matrix
 
@@ -82,3 +99,9 @@ matrix[1], matrix[3] = matrix[3], matrix[1]
 for row in matrix:
     print(row)
 
+x, y, z, w = matrix
+
+print("x =", x)
+print("y =", y)
+print("z =", z)
+print("w =", w)
