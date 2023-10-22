@@ -4,10 +4,12 @@ The people working on this project are Darshini Rajamani, Abbas Dohadwala, Luke 
 # Our goals
 We're working on computing code that can find a liftable and extendable matrix. We have longer-term goals, but working on the short ones right now. We are testing our code with simple examples that we know will always give us a certain output so that we can make sure there's no bugs in the code.
 
-We plan to make a working code and focus on elegance later on. We're using Python along with NumPy, Random, and SciPy (specifically scipy.linprog).
+We plan to make a working code and focus on elegance later on. We're using Python along with NumPy, Random, and SciPy (specifically linprog).
 
 # What we're doing to meet those goals
-We are currently working together to compute the code and understand the theory. Some are focusing on theory while others are focusing on code so we may work with what we do best
++ Working together to compute the code and understand the theory. Some are focusing on theory while others are focusing on code
++ reading the professor's notes and making sure we understand our code
++ adding many comments everywhere so we know exactly what everything does and anyone reading the code can also understand it
 
 # File information
 1. test3 = code that creates a positive semidefinite matrix
