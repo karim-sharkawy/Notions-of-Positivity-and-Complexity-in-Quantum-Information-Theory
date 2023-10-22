@@ -2,9 +2,9 @@
 The people working on this project are Darshini Rajamani, Abbas Dohadwala, Luke Luschwitz, and Karim El-Sharkawy of Purdue University
 
 # Our goals
-We're working on computing code that can find a liftable and extendable matrix. We have longer-term goals, but working on the short ones right now. We are testing our code with simple examples that we know will always give us a certain output so that we can make sure there's no bugs in the code.
+We're working on computing code that can find a liftable and extendable matrix. We have longer-term goals, but working on the short ones right now. We are testing our code with simple examples that we know will always give us a certain output to ensure there are no bugs in the code.
 
-We plan to make a working code and focus on elegance later on. We're using Python along with NumPy, Random, and SciPy (specifically linprog).
+We plan to make a working code and focus on elegance later on. We're using Python and NumPy, Random, and SciPy (specifically linprog).
 
 # What we're doing to meet those goals
 + Working together to compute the code and understand the theory. Some are focusing on theory while others are focusing on code
@@ -18,4 +18,4 @@ We plan to make a working code and focus on elegance later on. We're using Pytho
 4. ...
 
 # Extra information
-N/A
+Note from Karim: I would like to mention that everyone is working on this code and helping with the understanding. It seems like I'm contributing the most based on activity, but this is because I usually take the new code and upload/update it. Each and every single member of this team is helping immensely!
