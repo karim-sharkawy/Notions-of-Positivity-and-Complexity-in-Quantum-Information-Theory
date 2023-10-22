@@ -19,3 +19,4 @@ We plan to make a working code and focus on elegance later on. We're using Pytho
 
 # Extra information
 Note from Karim: Each and every single member of this team is helping immensely with coding and understanding. It seems like I'm contributing the most based on activity, but this is because I usually take the new code and upload/update it.
+- to give an example, I uploaded test3, but it was entirely worked on by Darshini
