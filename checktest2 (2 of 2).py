@@ -1,3 +1,5 @@
+# This code was created by Darshini Rajamani of Purdue University
+
 from sympy import symbols, solve, And, Eq
 from sympy.solvers.inequalities import reduce_rational_inequalities
 import sympy as sym
