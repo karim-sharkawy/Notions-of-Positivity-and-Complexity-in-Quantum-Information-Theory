@@ -9,7 +9,7 @@ def is_valid(matrix, rows, cols, row, col, num):
     # initial assigment to check validation
     matrix[row][col] = num
 
-    if row >= 2 and col == cols - 1:  # checking validatation least after filling two rows
+    if row >= 2 and col == cols - 1:  # checking validatation atleast after filling two rows
         for i in range(cols):
             # check if x + w < 0
             if matrix[0][i] is not None and matrix[3][i] is not None:
