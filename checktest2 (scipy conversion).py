@@ -1,7 +1,7 @@
 from scipy.optimize import linprog
 
 # Author: Luke Luschwitz and Karim El-Sharkawy
-# Last edit: 10/26/23 6:00pm
+# Last edit: 10/26/23 7:35pm
 
 # link to scipy.optimize.linprog: https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linprog.html
 
@@ -12,6 +12,7 @@ from scipy.optimize import linprog
 
 # The points in P(2,2) that were mapped from E(2,2).
 # Points are mapped by f: E(2,2) -> P(2,2)
+# We know this works along with all 1's
 x = [0,0,0,0] # x is a mapped point in P(2,2)
 y = [0,0,0,0] # y is a mapped point in P(2,2)
 z = [0,0,0,0] # z is a mapped point in P(2,2)
@@ -31,13 +32,7 @@ matrix = [x,
 
 # In the scipy.optimize.linprog documentation, mat is c: "The coefficients of the linear objective function to be minimized".
 # On Prof. SinClair's blackboard, mat is t: the vector of variables t1,t2,t3,t4 that need to be minimized/maximized.
-# QUESTION: is this the parameter c in the scipy.optimize.linprog documentation?
-# QUESTION: should mat be all 1's or two 1's and two -1's?
-mat = [1, 1, -1, -1]
-a = mat[0]
-b = mat[1]
-c = mat[2]
-d = mat[3]
+mat = [1, 1, 1, 1]
 
 # for_A_ub represents the system of inequalities
 for_A_ub = [[1,0,0,0],
