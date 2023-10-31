@@ -2,7 +2,7 @@
 The people working on this project are Darshini Rajamani, Abbas Dohadwala, Luke Luschwitz, and Karim El-Sharkawy of Purdue University
 
 # Our goals
-We're working on computing code that can find a liftable and extendable matrix. We have longer-term goals, but working on the short ones right now. We are testing our code with simple examples that we know will always give us a certain output to ensure there are no bugs in the code.
+We have successfully completed the our initial goal of making code that finds if a matrix is extendable or not. we now have other goals to achieve, that being finding extremities, plotting the shapes of the extreme points, and others.
 
 We plan to make a working code and focus on elegance later on. We're using Python and NumPy, Random, and SciPy (specifically linprog).
 
@@ -20,3 +20,7 @@ We plan to make a working code and focus on elegance later on. We're using Pytho
 # Extra information
 Note from Karim: Each and every single member of this team is helping immensely with coding and understanding. It seems like I'm contributing the most based on activity, but this is because I usually take the new code and upload/update it.
 - to give an example, I uploaded test3, but it was entirely worked on by Darshini
+
+last update:
+By: Karim
+At: 11:30 PM October 30th 2023
