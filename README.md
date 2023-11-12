@@ -2,7 +2,7 @@
 The people working on this project are Darshini Rajamani, Abbas Dohadwala, Luke Luschwitz, and Karim El-Sharkawy of Purdue University
 
 # Our goals
-We have successfully completed the our initial goal of making code that finds if a matrix is extendable or not. we now have other goals to achieve, that being finding extremities, plotting the shapes of the extreme points, and others.
+We have successfully completed our initial goal of making code that finds if a matrix is extendable or not. we now have other goals to achieve, that being finding extremities, plotting the shapes of the extreme points, and others.
 
 We plan to make a working code and focus on elegance later on. We're using Python and NumPy, Random, and SciPy (specifically linprog).
 
@@ -12,8 +12,8 @@ We plan to make a working code and focus on elegance later on. We're using Pytho
 + adding many comments everywhere so we know exactly what everything does and anyone reading the code can also understand it
 
 # File information
-1. test3 = code that creates a positive semidefinite matrix
-2. checktest2 = (currently working on this). Tries to find if the matrix is liftable or extendable
+1. Creating Extendable... = Finds a large number of mappings, some extendable and others not, then uses ML (sklearn.logisticregression) to get closer to our goal
+2. ...
 3. ...
 4. ...
 
@@ -23,4 +23,4 @@ Note from Karim: Each and every single member of this team is helping immensely 
 
 last update:
 By: Karim
-At: 11:30 PM October 30th 2023
+At: 2:42 PM November 12th 2023
