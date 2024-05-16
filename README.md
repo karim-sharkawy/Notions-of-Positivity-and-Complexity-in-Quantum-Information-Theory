@@ -1,5 +1,7 @@
 # Overview
-This project is supervised by [Professor Thomas Sinclair](https://www.math.purdue.edu/~tsincla/) of Purdue Mathematics. Contributors of this project are [Darshini Rajamani](//www.linkedin.com/in/darshini-rajamani/), [Abbas Dohadwala](//www.linkedin.com/in/abbas-dohadwala-74872b289/), [Luke Luschwitz](https://www.linkedin.com/in/luke-luschwitz/), and [Karim El-Sharkawy](//www.linkedin.com/in/karimme/) of Purdue University. We're using Python with NumPy, SciPy (specifically linprog), and sklearn libraries. Our research focuses on analyzing positive mappings (matrices) and their extendibility, involving the development of an intricate code to evaluate specific matrix properties and visualize their cones. The code itself is a sophisticated algorithm that classifies and validates matrices based on mathematical criteria such as extendibility. It draws on a blend of disciplines including linear algebra, optimization, linear programming, Euclidean distance geometry, and machine learning, particularly SVM.
+This project is supervised by [Professor Thomas Sinclair](https://www.math.purdue.edu/~tsincla/) of Purdue Mathematics. Contributors of this project are [Darshini Rajamani](//www.linkedin.com/in/darshini-rajamani/), [Abbas Dohadwala](//www.linkedin.com/in/abbas-dohadwala-74872b289/), [Luke Luschwitz](https://www.linkedin.com/in/luke-luschwitz/), and [Karim El-Sharkawy](//www.linkedin.com/in/karimme/) of Purdue University. 
+
+Our research focuses on analyzing positive mappings (matrices) and their extendibility, involving the development of an intricate code to evaluate specific matrix properties and visualize their cones. We're using Python with NumPy, SciPy (specifically linprog), and sklearn libraries. The code itself is a sophisticated algorithm that classifies and validates matrices based on mathematical criteria such as extendibility. It draws on a blend of disciplines including linear algebra, optimization, linear programming, Euclidean distance geometry, and machine learning, particularly SVM.
 
 # Our goals
 Our main goal is to find patterns within extendable matrices. In other words, we want to know what differentiates extendable and nonextendable matrices. This would decrease the amount of time and effort needed to identify if a matrix extends or not. Currently, we're investigating colinearity and if the matrices are coplanar, to determine if that's the key.
@@ -17,4 +19,4 @@ Our main goal is to find patterns within extendable matrices. In other words, we
 - trueClassifiersGood: lists the best classifiers
 3. [Project Guide](https://docs.google.com/document/d/1TUfcBNzSqa3OW8TWufIVz1TMENRcCtAPWqXohrkYaok/edit?usp=sharing): A guide for anyone wanting to catch up with the project or understand the entire process. Can be used as a guide or a resource to refresh
 
-last update by Karim at 3:00 AM May 26th 2024
+last update by Karim at 3:03 AM May 26th 2024
