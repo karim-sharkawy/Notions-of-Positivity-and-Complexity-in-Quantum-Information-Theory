@@ -1,13 +1,11 @@
-# Professor Thomas Sinclair supervises this project
-Contributors of this project are Darshini Rajamani, Abbas Dohadwala, Luke Luschwitz, and Karim El-Sharkawy of Purdue University (contacts below)
+# Overview
+This project is supervised by [Thomas Sinclair](https://www.math.purdue.edu/~tsincla/) of Purdue Mathematics. Contributors of this project are [Darshini Rajamani](//www.linkedin.com/in/darshini-rajamani/), [Abbas Dohadwala](//www.linkedin.com/in/abbas-dohadwala-74872b289/), [Luke Luschwitz](https://www.linkedin.com/in/luke-luschwitz/), and [Karim El-Sharkawy](//www.linkedin.com/in/karimme/) of Purdue University
 
 # Our goals
-We have successfully completed our initial goal of making code that finds if a matrix is extendable or not. we now have other goals to achieve, that being finding extremities, plotting the shapes of the extreme points, and others.
-
-We plan to make a working code and focus on elegance later on. We're using Python and NumPy, Random, and SciPy (specifically linprog), and sklearn.
+We have successfully completed our initial goal of making code that finds if a matrix is extendable or not. we now have other goals to achieve, that being finding extremities, plotting the shapes of the extreme points, and others. We plan to make a working code and focus on elegance later on. We're using Python with NumPy, SciPy (specifically linprog), and sklearn libraries.
 
 # What we're doing to meet those goals
-+ Working together to compute the code and understand the theory. Abbas and Karim are focusing on theory while Luke and Darshini are focusing mainly on the code
++ Working together to compute the code and understand the theory. Communicating with each other to accurately translate the theory into code
 + reading the professor's notes and making sure we understand our code by doing a lot of reading and understanding what the computer is giving us
 + adding many comments everywhere so we know exactly what everything does and anyone reading the code can also understand it
 
@@ -19,16 +17,6 @@ We plan to make a working code and focus on elegance later on. We're using Pytho
 - trueClassifiersGood: lists the best classifiers
 3. Project Guide: A guide for anyone wanting to catch up with the project or understand the entire process. Can be used as a guide or a resource to refresh
 
-# Extra information
-1. There are other files in the data sets folder, but those aren't important right now 
-
-# Contact
-+ Professor Sinclair: https://www.math.purdue.edu/~tsincla/
-+ Karim: https://www.linkedin.com/in/karimme/
-+ Darsh: https://www.linkedin.com/in/darshini-rajamani/
-+ Abbas: https://www.linkedin.com/in/abbas-dohadwala-74872b289/
-+ Luke: https://www.linkedin.com/in/luke-luschwitz/
-
 last update:
 By: Karim
-At: 11:15 PM February 26th 2024
+At: 3:00 AM May 26th 2024
