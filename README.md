@@ -19,4 +19,4 @@ Our main goal is to find patterns within extendable matrices. In other words, we
 - trueClassifiersGood: lists the best classifiers
 3. [Project Guide](https://docs.google.com/document/d/1TUfcBNzSqa3OW8TWufIVz1TMENRcCtAPWqXohrkYaok/edit?usp=sharing): A guide for anyone wanting to catch up with the project or understand the entire process. Can be used as a guide or a resource to refresh
 
-last update by Karim at 3:03 AM May 26th 2024
+last update by Karim at 3:03 AM May 16th 2024
