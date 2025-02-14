@@ -1,6 +1,13 @@
 # Overview
 This project is supervised by [Professor Thomas Sinclair](https://www.math.purdue.edu/~tsincla/) of Purdue Mathematics. Contributors of this project are [Darshini Rajamani](//www.linkedin.com/in/darshini-rajamani/), [Abbas Dohadwala](//www.linkedin.com/in/abbas-dohadwala-74872b289/), [Luke Luschwitz](https://www.linkedin.com/in/luke-luschwitz/), and [Karim El-Sharkawy](//www.linkedin.com/in/karimme/) of Purdue University. 
 
+Below are two research papers we have completed so far:
+"Insights into the Untanglement Mapping, the Properties of Positive Mappings, and the Conditions for Extension" – This paper explores the theoretical underpinnings of positive mappings, their structural properties, and the necessary conditions for their extension. [Positive_Mappings_Proofs-3.pdf](https://github.com/user-attachments/files/18793257/Positive_Mappings_Proofs-3.pdf)
+
+
+"An Elementary Approach to Farkas’ Lemma and Its Relation to Hyperplane Separation" – This paper presents a fundamental perspective on Farkas’ Lemma, highlighting its connections to hyperplane separation in optimization theory.[Farkas Lemma.pdf](https://github.com/user-attachments/files/18793259/Farkas.Lemma.pdf)
+
+
 Our research focuses on analyzing positive mappings and their extendibility, involving the development of an intricate code to evaluate specific matrix properties and visualize their cones. We're using Python with NumPy, SciPy (specifically linprog), and sklearn libraries. The code itself classifies and validates matrices based on mathematical criteria such as extendibility. It draws on a blend of disciplines including linear algebra, optimization, linear programming, Euclidean distance geometry, and machine learning, particularly SVM. Please read our papers for more information on the theory of positive mappings and their extensions.
 
 # Our goals
