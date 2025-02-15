@@ -1,5 +1,5 @@
-# Overview
-This project is supervised by [Professor Thomas Sinclair](https://www.math.purdue.edu/~tsincla/) of Purdue Mathematics. Contributors of this project are [Darshini Rajamani](//www.linkedin.com/in/darshini-rajamani/), [Abbas Dohadwala](//www.linkedin.com/in/abbas-dohadwala-74872b289/), [Luke Luschwitz](https://www.linkedin.com/in/luke-luschwitz/), and [Karim El-Sharkawy](//www.linkedin.com/in/karimme/) of Purdue University.
+# Notions of Positivity and Complexity in Quantum Information Theory
+This project is supervised by [Professor Thomas Sinclair](https://www.math.purdue.edu/~tsincla/) of Purdue Mathematics. Contributors of this project are [Darshini Rajamani](//www.linkedin.com/in/darshini-rajamani/), [Luke Luschwitz](https://www.linkedin.com/in/luke-luschwitz/), and [Karim El-Sharkawy](//www.linkedin.com/in/karimme/) of Purdue University.
 
 Below are two research papers we have completed so far:
 
