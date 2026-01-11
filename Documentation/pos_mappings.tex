@@ -1,0 +1,1077 @@
+%\documentclass{article}
+\documentclass[11pt]{amsart}
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb, tikz}
+\usetikzlibrary{arrows}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage{enumitem}
+
+\usepackage{mathtools}
+%\usepackage{tgpagella}
+%\usepackage{eulervm}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage[hidelinks]{hyperref}
+\usepackage[marginpar=2.5cm]{geometry}
+\usepackage{xcolor}\usepackage{marginnote}
+\usepackage{amsrefs}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{main}{Theorem}
+\newtheorem{mconj}[main]{Conjecture}
+\newtheorem{mcor}[main]{Corollary}
+\renewcommand{\themain}{\Alph{main}}
+%\newtheorem{thm}{Theorem}[subsection]
+\newtheorem*{thm*}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{fact}[thm]{Fact}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem*{prop*}{Proposition}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem*{princ}{Principle}
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{notation}[thm]{Notation}
+\newtheorem{remark}[thm]{Remark}
+\newtheorem{exercise}[thm]{Exercise}
+\newtheorem{question}[thm]{Question}
+\newtheorem{problem}[thm]{Problem}
+\newtheorem{example}[thm]{Example}
+\newtheorem{claim}[thm]{Claim}
+\newtheorem{subclaim}[thm]{Subclaim}
+\def\bb{\mathbb}
+
+%\newcommand{\REMARKNORMAL}[1]{\normalmarginpar\marginnote{\tt #1}}
+\textwidth 5.50in
+\oddsidemargin 0.375in
+\evensidemargin 0.375in
+
+\title[Positive Liftable Mappings]{Insights into the untanglement mapping, the properties of positive mappings, and the conditions for extension}
+\author[El-Sharkawy, Rajamani, Luschwitz, Sinclair]{Karim El-Sharkawy/Darshini Rajamani/Luke Luschwitz \\ Professor Thomas Sinclair}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+Positive mappings and their extensions play a fundamental role in diverse fields such as optimization and quantum information theory. The crux of this investigation lies in understanding the $\tau$ operator, referred to as the untangling mapping, which possesses the unique capability of rendering any positive mapping extendable when applied appropriately.
+
+The central theorem under scrutiny asserts that a map admits a positive lifting if and only if it can be untangled. This untangling operation is mathematically defined by the map $\tau: (a, b, c, d) \mapsto \left( \frac{a+d}{2}, \frac{b+c}{2}, \frac{a+c}{2}, \frac{b+d}{2} \right)$. The transformative impact of $\tau$ is profound: it shifts the vector space from its original cone to a restricted cone, denoted as $(E_{2,2}, P_{2,2}) \to (E_{2,2})$.
+
+Our goal in this paper is to rigorously prove this conjecture, establishing that the application of $\tau$ guarantees the existence of an extension for any given positive mapping. This exploration not only delves into the theoretical underpinnings of positive mappings and their extensions but also explores practical implications in fields requiring robust solutions in the face of constrained resources.
+
+To achieve this, we delve into detailed examinations of the properties of positive mappings, the conditions that dictate their extension under $\tau$, and computational analyses of $\tau$’s matrix representations and their implications. By providing a comprehensive framework for understanding the behavior of $\tau$ and its interplay with positive mappings, this paper contributes to a deeper comprehension of linear transformations in structured vector spaces.
+
+The subsequent sections will unfold the background theory, mathematical formulations, computational results, and conclusive proofs that substantiate the Untanglement Conjecture, thereby offering new insights and practical tools for extending positive mappings across various domains of application.
+
+\section{Background}
+
+We define an ordered vector space by \((V, V^+)\), where \(V\) is a vector space and \(V^+ \subset V\) is a \emph{cone} that establishes a partial order on \(V\) and satisfies the following properties:
+\begin{enumerate}
+    \item \(\forall x, y \in V^+\), \(x + y \in V^+\);
+    \item \(\forall t \geq 0\), \(tV^+ \subset V^+\);
+    \item \(V^+ \cap -V^+ = \{0\}\);
+    \item $V^+ - V^+ = V$ in the real case and $V+ - V^+ + iV^+ - iV^+ = V$ in the complex case. I.e. the difference of points in $V^+$ span $V$.
+\end{enumerate}
+
+\begin{example}
+    Let $V = \bb R^n$. The \emph{orthant} 
+    \[\bb R_+^n := \{x = (x_1,\dotsc,x_n)\in \bb R^n : x_i\geq 0, i=1,\dotsc,n\}\]
+    is a cone in $V$.
+\end{example}
+
+\begin{prop}
+    Let $V = H_n(\bb R)$, the vector space of all symmetric, real $n\times n$ matrices. The \emph{positive semidefinite matrices} form a cone in $H_n(\bb R)$.
+\end{prop}
+
+\begin{proof} Denote the positive semi-definite matrices by: $L(v) \leftrightarrow H^+_{n}$.
+\begin{enumerate}
+    \item Let \(A, B \in H^+_{n}\), then \[A + B = A^T + B = A^T + B^T = (A + B)^T\] Hence, \(A + B \in H^+_{n}\).
+    \item Let \(A \in H^+_{n}\) and \(t \geq 0\), then \[tA = tA^T = (tA)^T\] Hence, \(tH^+_{n} \subset H^+_{n}\).
+    \item Let \(A \in H^+_{n}\) be nonzero, then it has positive eigenvalues \(\lambda_1, ..., \lambda_n\). By definition of \(H^+_{n}\), \(-A \notin H^+_{n}\) because it has negative eigenvalues. Hence, \[A \in H^+_{n} \iff -A \notin H^+_{n}\] Same reasoning for \(-A\).
+    \item For any symmetric matrix \( C \in V \), We want to show that \( \forall C \in V \), \( C = A - B \) for some \( A, B \in V^+ \). Define
+   \[
+   A = \frac{1}{2} (C + |C|), \quad B = \frac{1}{2} (|C| - C),
+   \]
+   where \( |C| \) is the matrix whose eigenvalues are the absolute values of the eigenvalues of \( C \). 
+
+\( A = \frac{1}{2}(C + |C|) \) is positive semidefinite because it is symmetric with non-negative eigenvalues. Similarly for $B$. Now just taking the difference,
+   \[
+   A - B = \frac{1}{2}(C + |C|) - \frac{1}{2}(|C| - C) = C.
+   \]
+
+Since \( C \) can be written as \( A - B \) with \( A, B \in V^+ \), we have:
+   \[
+   V^+ - V^+ = V.
+   \]
+
+Thus, the difference of two positive semidefinite matrices spans the entire space of symmetric matrices, proving the fourth condition.
+
+\end{enumerate}
+\end{proof}
+
+$V^+$ defines a partial order on $V$ by $x\preceq y$ if $y -x \in V^+$. This order satisfies:
+\begin{enumerate}
+    \item $x\preceq y$ implies $x+z\preceq y+z$ for all $z\in V^+$;
+    \item $x\preceq y$ implies that $tx \preceq ty$ for all $t\geq 0$;
+    \item $x\preceq y$ and $y\preceq x$ imply that $x=y$;
+    \item in the real case, for each $x\in V$ there is $y\in V$ so that $x+y\in V^+$.
+\end{enumerate}
+
+In the real case, such an order defines a cone as above by $V^+ := \{x\in V : 0\preceq x\}$.
+
+\begin{defn}
+    Let $J\subset V$ be a subspace. We say that $J$ is a \emph{kernel} if in $Q := V/J$, the quotient vector space, we have the cone in $Q$ denoted as
+    \[Q^+ := \{[x] \in Q : (x+J)\cap V^+\not= \emptyset\}\]
+\end{defn}
+
+\begin{prop}
+    The $1$-dimensional subspace, $J\subset \bb R^2$, is a kernel exactly when $J\cap \bb R_+^2 = \emptyset$. Moreover, $(\bb R^2/J, (\bb R^2/J)^+)$ can be identified with $(\bb R, \bb R^+)$.
+\end{prop}
+
+\begin{proof}
+    The quotient space $\mathbb{R}^2 / J$ consists of equivalence classes $[x] = x + J$, where $x \in \mathbb{R}^2$. Define the cone in $\mathbb{R}^2 / J$ as:
+    \[
+    (\mathbb{R}^2 / J)^+ = \{[x] \in \mathbb{R}^2 / J : (x + J) \cap \mathbb{R}^2_+ \neq \emptyset\}.
+    \]
+    \textit{(1)} $\rightarrow$ \textit{(2)} If $J \cap \mathbb{R}^2_+ = \emptyset$, then $J$ is a kernel: If $J \cap \mathbb{R}^2_+ = \emptyset$, no vector in $J$ lies entirely within the positive orthant $\mathbb{R}^2_+ = \{(x, y) \in \mathbb{R}^2 : x \geq 0, y \geq 0\}$. This ensures that every coset $[x] \in \mathbb{R}^2 / J$ has a well-defined intersection with $\mathbb{R}^2_+$. Specifically, for any $[x] \in (\mathbb{R}^2 / J)^+$, there exists some $x' \in x + J$ such that $x' \in \mathbb{R}^2_+$. Therefore, the cone $(\mathbb{R}^2 / J)^+$ is well-defined.
+    
+    \textit{(2)} $\rightarrow$ \textit{(1)} If $J \cap \mathbb{R}^2_+ \neq \emptyset$, then $J$ is not a kernel: If $J \cap \mathbb{R}^2_+ \neq \emptyset$, there exists a vector $j \in J$ such that $j \in \mathbb{R}^2_+$. In this case, $J$ contains directions that lie entirely within the positive orthant. Consequently, the projection of $\mathbb{R}^2_+$ onto $\mathbb{R}^2 / J$ would collapse the cone structure, making the positivity condition ambiguous. Thus, $J$ is not a kernel.
+
+    Finally, since $J$ is a $1$-dimensional subspace, the quotient space $\mathbb{R}^2 / J$ is $1$-dimensional. This means $\mathbb{R}^2 / J$ is isomorphic to $\mathbb{R}$. The cone $(\mathbb{R}^2 / J)^+$ is defined as the projection of the positive orthant $\mathbb{R}^2_+$ onto $\mathbb{R}^2 / J$. Since $J \cap \mathbb{R}^2_+ = \emptyset$, this projection preserves the positivity structure, and $(\mathbb{R}^2 / J)^+$ corresponds to the positive real numbers $\mathbb{R}^+$. Therefore, $(\mathbb{R}^2 / J, (\mathbb{R}^2 / J)^+)$ can be identified with $(\mathbb{R}, \mathbb{R}^+)$.
+\end{proof}
+
+\begin{defn}
+    A linear map \(\phi: (V, V^+) \to (W/J, (W/J)^+)\) is said to be \emph{positive} if \(\phi(V^+) \subset (W/J)^+\) where \(J\) is the kernel.
+\end{defn}
+
+\begin{example}
+    Let $(V,V^+)$ be a real ordered vector space and let $J\subset V$ be a kernel. The quotient map $q: (V,V^+)\to (V/J, (V/J)^+)$ is positive as the cone $(V/J)^+$ is constructed so that this is exactly the case.
+\end{example}
+    
+\begin{defn}
+    Let $J\subset W$ be a kernel, and let $q: W\to W/J$ be the quotient map. We say that a positive map $\phi: (V,V^+)\to (W/J, (W/J)^+)$ admits a \emph{positive lifting} if there is a positive, linear map $\tilde\phi: (V,V^+)\to (W,W^+)$ so that $\phi = q\circ \tilde\phi$.
+\end{defn}
+
+\begin{prop}\label{ex:rn-lift}
+    Let $J_k\subset (\mathbb R^k, \mathbb R_+^k)$ be kernel. Show that if $\phi: \mathbb R^n\to \mathbb R^k/J_k$ is positive, then $\phi$ admits a positive lift $\tilde\phi: \mathbb R^n\to \mathbb R^k$.
+\end{prop}
+
+\begin{proof}
+    Let \( x \in \mathbb{R}_+^n \). By the definition of positivity:
+    \[
+    \phi(x) \in (\mathbb{R}^k / J_k)^+.
+    \]
+    This implies that there exists some \( z \in \mathbb{R}_+^k \) such that:
+    \[
+    q(z) = \phi(x), \quad \text{or equivalently, } [z] = \phi(x).
+    \]
+    Since \( q \) maps \( \mathbb{R}_+^k \) onto \( (\mathbb{R}^k / J_k)^+ \), we can always find such a \( z \) for each \( x \).
+
+    Define \( \tilde{\phi}: \mathbb{R}^n \to \mathbb{R}^k \) as:
+    \[
+    \tilde{\phi}(x) = z, \quad \text{where } z \text{ satisfies } q(z) = \phi(x).
+    \]
+    Since \( \phi(x) \in (\mathbb{R}^k / J_k)^+ \), the representative \( z \) can always be chosen from \( \mathbb{R}_+^k \). Linearity of \( \phi \) ensures that for each \( x \in \mathbb{R}^n \), \( z \) depends linearly on \( x \), making \( \tilde{\phi} \) a well-defined and linear map.
+
+    By construction, \( \tilde{\phi}(x) \in \mathbb{R}_+^k \) for all \( x \in \mathbb{R}_+^n \). Thus, \( \tilde{\phi} \) is a positive map:
+    \[
+    \tilde{\phi}(\mathbb{R}_+^n) \subseteq \mathbb{R}_+^k.
+    \]
+
+    To verify the relation \( \phi = q \circ \tilde{\phi} \), note that for any \( x \in \mathbb{R}^n \):
+    \[
+    q(\tilde{\phi}(x)) = q(z) = \phi(x).
+    \]
+    Thus:
+    \[
+    \phi(x) = q \circ \tilde{\phi}(x).
+    \]
+    Therefore, \( \phi \) admits a positive lift \( \tilde{\phi}: \mathbb{R}^n \to \mathbb{R}^k \).
+\end{proof}
+
+\begin{example}
+    All positive maps $\phi: (\bb R^n, \bb R_+^n)\to (\bb R^n,\bb R_+^n)$ are linear operators \(\phi(v) = Av\) where \(A\) is a matrix with non-negative entries. In other words, the set of all positive maps is the set of linear maps represented by non-negative matrices.
+\end{example}
+
+\begin{defn}
+    Let $f: U \to (W, W^+)$ be a positive linear map defined on a subspace $U \subseteq V$. A \textit{positive extension} of $f$ to $V$ is a positive linear map $f': V \to (W, W^+)$ such that:
+\[
+f'(x) = f(x) \quad \text{for all } x \in U
+\]
+\end{defn}
+Note that the domain of $f'$ is the entire space $V$, not just the subspace $U$. However, $f'(x) \in W^+$ for all $x \in V^+ \cap U$.
+
+In the context of ordered vector spaces, \textit{lifting} and \textit{extension} are distinct concepts. \textit{Lifting} focuses on recovering a map in the original space $W$ while ensuring compatibility with the quotient structure and preserving positivity. An \textit{extension}, on the other hand, expand the domain of $f$ to the full space $V$ while maintaining positivity across all elements of $V^+$. Extension is entirely concerned with the domain enlargement rather than the structure of the codomain.
+
+They're fundamentally different in both their construction and the conditions required for their existence. Lifting reconstructs a map from the quotient structure into the larger space, while extension broadens the domain of a map without altering the codomain.
+
+\begin{example} Let \((\bb R^{2n}, \bb R_+^{2n})\) be an ordered vector space with $J_n$ is the span of $(1,\dotsc,1, -1,\dotsc, -1)$, where there are $n$ 1's and $n$ -1's. We have that 
+\[
+E_n := \{(x_1,\dotsc,x_n,y_1,\dotsc,y_n)\in \bb R^{2n} : \sum_i x_i = \sum_i y_i\}.
+\]
+
+The positive cone in $E_{2,2} = \{(a,b,c,d) : a+b = c+d\}$, denoted $P_{2,2},$ is given by 
+\[
+P_{3,3} = \{(a,b,c,d)\in E_{2,2} : \exists t,\ a+t,b+t,c-t, d-t \geq 0\}.
+\]
+\end{example}
+
+\begin{lem}\label{lem:p33-alt}
+We have that 
+    \[P_{3,3} = \{(x_1,x_2,x_3,y_1,y_2,y_3) \in E_{3,3} : x_i + y_j\geq 0, i,j=1,2,3\}.\]
+\end{lem}
+
+\begin{proof}
+    If $(x_1,x_2,x_3,y_1,y_2,y_3)\in P_{3,3}$, then there is some $t$ so that $x_1+t, x_2+t, x_3+t, y_1-t, y_2-t, y_3-t\geq 0$. Therefore $x_i + y_j = (x_i + t) + (y_j -t)\geq 0$. In the other direction, we note that if $x_i+ y_j\geq 0$, then either all the $x_i$'s are non-negative or all the $y_j$'s are non-negative. Without loss of generality, assume that the $x_i$'s are non-negative and that $x_1$ is one with minimal value. Then we have that $x_i - x_1\geq 0$ and $y_j + x_1\geq 0$, so $t=-x_1$ works. 
+\end{proof}
+
+This example is crucial as we will mainly be working with \((E_{2,2})\) and \((E_{2,2}, P_{2,2})\). Our projection map is as follows:
+
+\begin{center}
+\begin{tikzpicture}[>=latex]
+    % Define nodes for vector spaces
+    \node (R) at (0,0) {$(R, R^+)$};
+    \node (R2) at (4,0) {$(R,R^+)$}; %dual space
+    \node (E) at (0,-4) {$V^+_{small} := E_{2,2}$};
+    \node (Ep) at (4,-4) {$(E_{2,2},P_{2,2}) := V^+_{big}$};
+
+    \draw[<->](R) -- (R2) node[midway, above]{self-dual};
+    \draw[->][dashed] (E) -- (R2) node[near end, above]{$\tilde{f}$};
+    \draw[->] (R) -- (Ep) node[near start, above] {$\hat{f}$};
+    \draw[->][dashed] (R2) -- (Ep) node[midway, right] {$q$};
+    \draw[->] (E) -- (Ep) node[midway, below]{$f$};
+    \draw[->] (E) -- (R) node[midway, left] {$I$};
+    \draw[->] (Ep) to[bend right=30] node[midway, above] {$\tau$} (E);
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+    Where \(f\) is a positive mapping, \(\tau\) is the untangling map, \( \hat{f} \) represents an extension, \( q \circ \tilde{f} \) represents a lifting, and \(I\) is an inclusion
+\end{center}
+Notice that $(E_{2,2}, P_{2,2}) \cong R^4/J_{2,2}$ where $J_{2,2} = \text{span}\{ (1, 1, -1, -1) \}$.
+
+\begin{defn}
+    Let $V$ be real vector space and $P\subset V$ be a cone. We say that $x\in P$ is \emph{extreme} if whenever $x = y+z$ with $y,z\in P$, then $y = tx$ and $z = (1-t)x$ for some $0\leq t\leq 1$. 
+\end{defn}
+The extreme points are the ``edges'' of the cone. For instance, for the orthant in $\bb R^3$, check that $(t,0,0)$, $(0,t,0)$ and $(0,0,t)$ for $t\geq 0$ are the extreme points.
+
+\begin{prop}
+    Let $P$ be a closed cone in $\bb R^n$. Then $P$ has at least one extreme point and every $x\in P$ is a convex combination of extreme points. 
+\end{prop}
+
+This proposition has the following useful consequence:
+
+\begin{cor}\label{cor:extreme-pos}
+    Let $f: (V,V^+)\to (W,W^+)$ be a linear map between finite-dimensional, ordered vector spaces. We have that $f$ is positive if and only if $f(x)\in W^+$ for every extreme point in $x\in V^+$. 
+\end{cor}
+
+\begin{defn}
+    Properties of positive mappings.
+
+    The properties of positive mappings are crucial for understanding their structures and will be referenced throughout the proofs, as we're only considering positive mappings. Note, that these properties are checked for matrices after they've been applied to \(\tau\) as well, because proving that they're no longer positive implies that they don't extend. The three rules are:
+
+    \begin{enumerate}
+        \item The first rule states \(a_i + b_i = c_i + d_i \geq 0\) must hold, where \(a_i,b_i,c_i \text{ and } d_i\) are the respective values of the rows of \(f\). This condition stems from the subspace $E_{2,2}$.
+        \item The second rule, which stems directly form the first, states \(-a_i, -b_i \leq c_i, d_i\).
+        \item The final rule consists of four inequalities:
+\begin{align*}
+    a_i + c_i \geq 0, \\
+    a_i + d_i \geq 0, \\
+    b_i + c_i \geq 0, \\
+    b_i + d_i \geq 0
+\end{align*}
+    \end{enumerate}
+\end{defn}
+
+\begin{thm}
+    A positive extension $f'$ exists exactly when 
+\begin{equation}\label{eq:pos-extension-e22}
+    \exists t \in V^+ \left\{
+    \begin{aligned}
+        &y - t \in V^+ \\
+        &w - t \in V^+ \\
+        &x - y + t \in V^+
+    \end{aligned}
+    \right
+\end{equation}
+
+where $t \in E_{2,2}$ and $x, y, z, w$ are rows of $f$.
+\end{thm}
+
+\begin{proof}
+Let $f: E_{2,2} \to (V,V^+)$ be a linear map. We may extend $f$ to a map $f': \bb R^4\to (V,V^+)$. Let $e_1,e_2,e_3,e_4$ be the standard basis for $\bb R^4$, that is, $e_1 = (1,0,0,0)$, and so on. Note that this basis consists of extreme points for the orthant and every extreme point is a non-negative scalar multiple of one of these basis vectors; thus, $f'$ is positive exactly when $f'(e_i)\in V^+$ for $i=1,2,3,4$. Let $f'(e_1) = a$, $f'(e_2) = b$, $f'(e_3)=c$ and $f'(e_4)=d$. Using Corollary \ref{cor:extreme-pos} we have that $f$ is positive exactly when 
+\begin{equation}
+    \left\{
+    \begin{aligned}
+        a+c &= x\in V^+\\
+        a+d &= y\in V^+\\
+        b+c &= z\in V^+\\
+        b+d &= w\in V^+
+    \end{aligned}
+    \right
+\end{equation}
+Notice from these equations that $x+w=y+z$. Given the values of $f(1,0,1,0) = x$, $f(1,0,0,1) = y$, $f(0,1,1,0) = z$, and $f(0,1,0,1)=w$, we can solve the previous system of equations to see if there is an extension $f':\bb R^4\to V$ of $f$ which is positive, that is, the system can be solved for some choice of all $a,b,c,d$ positive. Doing so, we see that:
+\begin{equation}
+    \left\{
+    \begin{aligned}
+        a &= y-t\\
+        b &= w-t\\
+        c &= x-y+t\\
+        d &= t
+    \end{aligned}
+    \right
+\end{equation}
+where $t$ is a parameter. (Note that $x+w = y+z$ is used to verify this solution is correct.) Thus, we see that such a positive extension $f'$ exists exactly when 
+\begin{equation}\label{eq:pos-extension-e22}
+    \exists t\in V^+\left\{
+    \begin{aligned}
+        &y-t\in V^+\\
+        &w-t\in V^+\\
+        &x-y+t\in V^+
+    \end{aligned}
+    \right
+\end{equation}
+\end{proof}
+
+\begin{example}
+    \textbf{A positive nonextendable mapping.} We will look at an example of a positive map $f: E_{2,2} \to (E_{2,2}, P_{2,2})$ that doesn't lift. Recall
+\[
+E_{2,2} = \{(a,b,c,d) : a+b = c+d\}
+\]
+
+\[
+\begin{bmatrix}
+x \\
+y \\
+z \\
+w \\
+\end{bmatrix}\ = \begin{bmatrix}
+5 & 1 & 3 & 3 \\
+1 & 6 & -1 & 8 \\
+0 & 6 & 0 & 6 \\
+6 & 1 & 2 & 5 \\
+\end{bmatrix}
+\]
+
+One can easily check that all 4 vectors in $f$ lie in $P_{2,2}$. The conditions for extension are met when $x,y,z \text{ and } w \in E_{2,2}^+$. 
+
+Finally, we have
+
+\[
+\begin{bmatrix}
+t \\
+x - y + t \\
+y - t \\
+w - t \\
+\end{bmatrix}\ = \begin{bmatrix}
+a & b & c & d \\
+4+a & -5+b & 4+c & -5+d \\
+1-a & 6-b & -1+c & 8-d \\
+6-a & 1-b & 2-c & 5-d \\
+\end{bmatrix}
+\]
+
+We know $b_i + d_i \geq 0$ by the third rule which we can use in the second and fourth rows respectively:
+\[
+-5 + b - 5 + d \geq 0 \leftrightarrow b + d \geq 10
+\]
+\[
+1 - b + 5 - d \geq 0 \leftrightarrow -b - d \geq -6 \leftrightarrow b + d \leq 6
+\]
+
+We find a contradiction because $b+d$ can't be larger than 10 and smaller than 6. Hence, this mapping is not extendable.
+\end{example}
+
+\begin{example}
+    Let's compute the extreme points for $E_{2,2}^+$. We first note that $(1,0,1,0)\in E_{2,2}^+$ is extreme. Why? Well, suppose $(1,0,1,0) = (a,b,c,d) + (x,y,z,w)$ with \[(a,b,c,d),(x,y,z,w)\in E_{2,2}^+.\] This implies that $b=y=0$ and $d=w=0$ since $b$ and $y$ are non-negative and sum to zero and the same is true for $d$ and $w$. Now the vector $(a,0,c,0)$ belongs to $E_{2,2}$, which means that $a = a+0 = c+0 = c$ and similarly $x=z$. This suffices to check the definition of extreme point.
+
+    By symmetry, it follows that $(0,1,1,0)$, $(1,0,0,1)$, and $(0,1,0,1)$ are also extreme in $E_{2,2}^+$ as are their non-negative scalar multiples. Let us show that this list is essentially complete by decomposing any vector $(a,b,c,d)\in E_{2,2}^+$ as a sum of these. Let us assume without loss of generality that $d$ is the minimal value among $a,b,c,d$. We can then check that 
+    \[(a,b,c,d) = (a,0,a,0) + (0,b-d,b-d,0) + (0,d,0,d)\]
+    works since $b-d\geq 0$.
+\end{example}
+
+\begin{example}
+    We see that every positive map $f:E_{2,2}\to \bb R$ has a positive extension to $f': \bb R^4\to \bb R$. There are two cases to check. If $x-y\geq 0$, then $t=0$ suffices. On the other hand, if $x-y\leq 0$, then $t = x-y$ works, again using the identity $x+w = y+z$. In either case, the extension is defined as 
+    \[f'(e_1) = y-t, f'(e_2) = w-t, f'(e_3) = x-y+t, f'(e_4) =t\]
+    and this map agrees with $f$ when restricted to $E_{2,2}$.
+\end{example}
+
+\section{Properties of $\tau$ and $\tau^{-1}$}
+
+\subsection{Computing \(M(\tau)\)}
+
+Computing \(M(\tau)\) is necessary for the second half of the proof. \(M(\tau)\) for every $f$ is computed based on how \(\tau\) affects the bases
+
+\[
+e_1 = (1,0,1,0), e_2 = (0,1,0,1) \]
+\[
+e_3 = (1,0,0,1), e_4 = (0,1,1,0)
+\]
+
+where $e_1 + e_2 = e_3 + e_4$. From here, we obtain
+
+\[
+M(\tau) = \begin{bmatrix}
+\tau(e_1) \\
+\tau(e_2) \\
+\tau(e_3) \\
+\tau(e_4)
+\end{bmatrix}
+\]
+
+Finally, we can obtain $f * M(\tau) := M(\tau)_f$, the matrix of $f$ after the transformation via
+
+\[
+M(\tau)_f = \begin{bmatrix}
+f \circ \tau(e_1) \\
+f \circ \tau(e_2) \\
+f \circ \tau(e_3) \\
+f \circ \tau(e_4)
+\end{bmatrix}^T = 
+f \circ M(\tau) = 
+\frac{1}{2}\begin{bmatrix}
+f(e_1) + f(e_3) \\
+f(e_2) + f(e_4) \\
+f(e_2) + f(e_3) \\
+f(e_1) + f(e_4) \\
+\end{bmatrix}^T = \begin{pmatrix}
+\frac{1}{2} & 0 & 0 & \frac{1}{2} \\
+0 & \frac{1}{2} & \frac{1}{2} & 0 \\
+\frac{1}{2} & 0 & \frac{1}{2} & 0 \\
+0 & \frac{1}{2} & 0 & \frac{1}{2}
+\end{pmatrix}^T
+\]
+
+We transpose because applying $\tau$ to a matrix differs from multiplying $f$ by $M(\tau)$. Applying $\tau$ to $f$ preserves $f$'s structure. However, in matrix multiplication ($f \cdot M(\tau)$), we multiply the columns of $M(\tau)$ by the rows of $f$. Therefore, we need to transpose $M(\tau)$ to maintain the structure.
+
+\begin{thm}
+    \(\tau\) is linear, invertible, and preserves positivity.
+\end{thm}
+
+\begin{proof}
+\textbf{Positivity.} For \((a, b, c, d) \in P_{2,2}\), where \(a, b, c, d \geq 0\):
+\[
+\tau(a, b, c, d) = \left( \frac{a+d}{2}, \frac{b+c}{2}, \frac{a+c}{2}, \frac{b+d}{2} \right).
+\]
+By rule 3, any value in the first half of the row added to any value in the second half must be positive. Hence, each component of $\tau$ is positive.
+
+\textbf{Linearity.} Consider two vectors \((a_1, b_1, c_1, d_1)\) and \((a_2, b_2, c_2, d_2)\) in \(\mathbb{R}^4\) and a scalar \(\lambda\).
+\[
+\tau((a_1, b_1, c_1, d_1) + (a_2, b_2, c_2, d_2)) = \tau(a_1 + a_2, b_1 + b_2, c_1 + c_2, d_1 + d_2)
+\]
+\[
+= \left( \frac{(a_1 + a_2) + (d_1 + d_2)}{2}, \frac{(b_1 + b_2) + (c_1 + c_2)}{2}, \frac{(a_1 + a_2) + (c_1 + c_2)}{2}, \frac{(b_1 + b_2) + (d_1 + d_2)}{2} \right)
+\]
+\[
+= \left( \frac{a_1 + d_1}{2} + \frac{a_2 + d_2}{2}, \frac{b_1 + c_1}{2} + \frac{b_2 + c_2}{2}, \frac{a_1 + c_1}{2} + \frac{a_2 + c_2}{2}, \frac{b_1 + d_1}{2} + \frac{b_2 + d_2}{2} \right)
+\]
+\[
+= \tau(a_1, b_1, c_1, d_1) + \tau(a_2, b_2, c_2, d_2).
+\]
+For scalar multiplication:
+\[
+\tau(\lambda(a, b, c, d)) = \tau(\lambda a, \lambda b, \lambda c, \lambda d)
+\]
+\[
+= \left( \frac{\lambda a + \lambda d}{2}, \frac{\lambda b + \lambda c}{2}, \frac{\lambda a + \lambda c}{2}, \frac{\lambda b + \lambda d}{2} \right)
+\]
+\[
+= \lambda \left( \frac{a + d}{2}, \frac{b + c}{2}, \frac{a + c}{2}, \frac{b + d}{2} \right)
+\]
+\[
+= \lambda \tau(a, b, c, d).
+\]
+
+\textbf{Invertibality.}
+\[
+\tau^{-1}(a,b,c,d) = (x,y,z,w) \Leftrightarrow \tau\tau^{-1}(a,b,c,d) = \tau(x,y,z,w) \Leftrightarrow (a,b,c,d) = \tau(x,y,z,w)
+\]
+
+Applying tau and multiplying both sides by 2, we have:
+
+\begin{center}
+    $2a = x + w \leftrightarrow A = x + w$ 
+    
+    $2b = y + z \leftrightarrow B = y + z$
+    
+    $2c = x + z \leftrightarrow C = x + z$
+    
+    $2d = y + w \leftrightarrow D = y + w$
+\end{center}
+
+To compute x, the first row of tau inverse, start with an equality that allows you to A, B, C, D in of x completely:
+\begin{center}
+    $x + y = z + w \Leftrightarrow x = z + w - y$
+
+    $A + C - rB - rD = (x + w) + (x+z) - r(y+w) - r(y+z)$ We add A and C because they contain the values, we then subtract a ratio of B and D because they contain no x values
+
+    $A + C - rB - rD = 2x - 2ry + (1-r)w + (1-r)z$. Notice that the LHS is in the form $x = z + w - y$
+
+    We then need to compute r. We know from the equation above that we need the ratio of z, w, and y to be the same. Hence, we set $2r = 1-r \rightarrow r = \frac{1}{3}$. We also use the absolute value because ...
+
+    Substituting r: $2x - \frac{2}{3}y + \frac{2}{3}w + \frac{2}{3}z = 2x + \frac{2}{3}(z + w - y) = 2x + \frac{2}{3}x = \frac{8}{3}x$ 
+
+    $\frac{8}{3}x = A + C - \frac{1}{3}B - \frac{1}{3}D = 2a + 2c - \frac{2}{3}b - \frac{2}{3}d$
+
+    Hence, $x = \frac{3}{4}a + \frac{3}{4}c - \frac{1}{4}b - \frac{1}{4}d$
+\end{center}
+
+Similar process for the other three rows. We get 
+\[
+\tau^{-1} = \begin{bmatrix}
+\frac{3}{4}x & \frac{-1}{4}y & \frac{3}{4}z & \frac{-1}{4}w\\
+\frac{-1}{4}x & \frac{3}{4}y & \frac{-1}{4}z & \frac{3}{4}w \\
+\frac{-1}{4}x & \frac{3}{4}y & \frac{3}{4}z & \frac{-1}{4}w \\
+\frac{3}{4}x & \frac{-1}{4}y & \frac{-1}{4}z & \frac{3}{4}w
+\end{bmatrix}^T = \begin{bmatrix}
+3/4 & -1/4 & 3/4 & -1/4 \\
+-1/4 & 3/4 & -1/4 & 3/4 \\
+-1/4 & 3/4 & 3/4 & -1/4 \\
+3/4 & -1/4 & -1/4 & 3/4 \\
+\end{bmatrix}
+\]
+
+Hence,
+\[
+\tau^{-1}: (a,b,c,d) \to \left( \frac{3a- b + 3c - d}{4}, \frac{-a + 3b - c + 3d}{4}, \frac{-a + 3b + 3c - d}{4}, \frac{3a - b - c + 3d}{4} \right).
+\]
+
+\end{proof}
+
+\subsection{Proving $\tau^{-1}$ is the inverse of $\tau$}
+\hfill\\
+
+Define the transformation matrix $\tau$ as:
+
+\[
+\tau = \begin{pmatrix}
+\frac{1}{2} & 0 & 0 & \frac{1}{2} \\
+0 & \frac{1}{2} & \frac{1}{2} & 0 \\
+\frac{1}{2} & 0 & \frac{1}{2} & 0 \\
+0 & \frac{1}{2} & 0 & \frac{1}{2}
+\end{pmatrix}
+\]
+
+Multiplying $\tau$ by $(a, b, c, d)$ gives:
+
+\[
+\tau \begin{pmatrix} a \\ b \\ c \\ d \end{pmatrix} = \begin{pmatrix}
+\frac{a + d}{2} \\
+\frac{b + c}{2} \\
+\frac{a + c}{2} \\
+\frac{b + d}{2}
+\end{pmatrix}
+\]
+
+Now, define the inverse matrix $\tau^{-1}$ as:
+
+\[
+\tau^{-1} = \begin{pmatrix}
+\frac{3}{4} & -\frac{1}{4} & \frac{3}{4} & -\frac{1}{4} \\
+-\frac{1}{4} & \frac{3}{4} & -\frac{1}{4} & \frac{3}{4} \\
+-\frac{1}{4} & \frac{3}{4} & \frac{3}{4} & -\frac{1}{4} \\
+\frac{3}{4} & -\frac{1}{4} & -\frac{1}{4} & \frac{3}{4}
+\end{pmatrix}
+\]
+
+Multiplying $\tau^{-1}$ by $(x, y, z, w)$ gives:
+
+\[
+\tau^{-1} \begin{pmatrix} x \\ y \\ z \\ w \end{pmatrix} = \begin{pmatrix}
+\frac{3}{4}x - \frac{1}{4}y + \frac{3}{4}z - \frac{1}{4}w \\
+-\frac{1}{4}x + \frac{3}{4}y - \frac{1}{4}z + \frac{3}{4}w \\
+-\frac{1}{4}x + \frac{3}{4}y + \frac{3}{4}z - \frac{1}{4}w \\
+\frac{3}{4}x - \frac{1}{4}y - \frac{1}{4}z + \frac{3}{4}w
+\end{pmatrix}
+\]
+
+
+To prove that $\tau^{-1}$ is indeed the inverse of $\tau$, we will multiply $\tau^{-1}$ by $\tau(a, b, c, d) = (x, y, z, w)$, and demonstrate that it returns $(a, b, c, d)$.
+
+### First Row Calculation
+
+The first row of $\tau^{-1} \cdot (x, y, z, w)$ is given by:
+
+\[
+\frac{3}{4}x - \frac{1}{4}y + \frac{3}{4}z - \frac{1}{4}w
+\]
+
+Substituting $x = \frac{a + d}{2}$, $y = \frac{b + c}{2}$, $z = \frac{a + c}{2}$, and $w = \frac{b + d}{2}$, we get:
+
+\[
+\frac{3}{4} \cdot \frac{a + d}{2} - \frac{1}{4} \cdot \frac{b + c}{2} + \frac{3}{4} \cdot \frac{a + c}{2} - \frac{1}{4} \cdot \frac{b + d}{2}
+\]
+
+Simplifying the terms:
+
+\[
+= \frac{3}{8}(a + d) - \frac{1}{8}(b + c) + \frac{3}{8}(a + c) - \frac{1}{8}(b + d)
+\]
+
+Grouping similar terms:
+
+\[
+= \frac{3}{8}a + \frac{3}{8}d - \frac{1}{8}b - \frac{1}{8}c + \frac{3}{8}a + \frac{3}{8}c - \frac{1}{8}b - \frac{1}{8}d
+\]
+
+Simplifying further:
+
+\[
+= \frac{6}{8}a + \frac{2}{8}d + \frac{2}{8}c - \frac{2}{8}b 
+\]
+
+\[
+= \frac{3}{4}a + \frac{1}{4}d + \frac{1}{4}c - \frac{1}{4}b 
+\]
+
+Substitute d = a + b - c (From the properties of Positive Mappings)
+
+
+\[
+= \frac{3}{4}a + \frac{a + b - c}{4} + \frac{1}{4}c - \frac{1}{4}b 
+\]
+
+\[
+= \frac{3}{4}a + \frac{1}{4}a + \frac{1}{4}b - \frac{1}{4}c + \frac{1}{4}c - \frac{1}{4}b 
+\]
+
+\[ = a \]
+
+
+Thus, the first row gives $a$ as the result.
+
+### Second Row Calculation
+
+For the second row of $\tau^{-1} \cdot (x, y, z, w)$, we have:
+
+\[
+-\frac{1}{4}x + \frac{3}{4}y - \frac{1}{4}z + \frac{3}{4}w
+\]
+
+Substituting the values for $x$, $y$, $z$, and $w$, we get:
+
+\[
+-\frac{1}{4} \cdot \frac{a + d}{2} + \frac{3}{4} \cdot \frac{b + c}{2} - \frac{1}{4} \cdot \frac{a + c}{2} + \frac{3}{4} \cdot \frac{b + d}{2}
+\]
+
+Simplifying:
+
+\[
+= -\frac{1}{8}(a + d) + \frac{3}{8}(b + c) - \frac{1}{8}(a + c) + \frac{3}{8}(b + d)
+\]
+
+Grouping similar terms:
+
+\[
+= -\frac{1}{8}a - \frac{1}{8}d + \frac{3}{8}b + \frac{3}{8}c - \frac{1}{8}a - \frac{1}{8}c + \frac{3}{8}b + \frac{3}{8}d
+\]
+
+\[
+= -\frac{1}{4}a + \frac{1}{4}d + \frac{3}{4}b + \frac{1}{4}c 
+\]
+
+Substituting d = a + b - c
+
+\[
+= -\frac{1}{4}a + \frac{a + b - c}{4} + \frac{3}{4}b + \frac{1}{4}c 
+\]
+
+\[
+= -\frac{1}{4}a + \frac{1}{4}a + \frac{1}{4}b - \frac{1}{4}c + \frac{3}{4}b + \frac{1}{4}c 
+\]
+
+\[
+= b
+\]
+
+Thus, the second row gives $b$ as the result. The same derivation applies for the third and fourth rows, which yield $c$ and $d$ respectively. Therefore, $\tau^{-1}$ is indeed the inverse of $\tau$.
+
+Notice that $M(\tau)$ lifts and $M(\tau^{-1})$ doesn't lift. Moreover, neither of the matrices are invertible, despite $\tau$ being invertible. This is because \(\tau\) with $E_{2,2}$ operates in 3D-space.
+
+\section{The Untanglement Theorem}
+
+\begin{thm}
+    A map admits a positive lifting if and only if it can be untangled, where the untangling map is defined by
+\[
+\tau: (a,b,c,d) \to \left( \frac{a+d}{2}, \frac{b+c}{2}, \frac{a+c}{2}, \frac{b+d}{2} \right).
+\]
+\end{thm} 
+
+The mapping \(\tau\) transforms the vector space with the original cone to the restriction cone (\((E_{2,2},P_{2,2}) \to (E_{2,2})\)). Our objective is to verify this conjecture which guarantees that the resulting map always has an extension regardless of the original mapping.
+
+\begin{proof} We need to prove two key directions:
+\begin{enumerate}
+    \item \(\tau(f) \text{ is always extendable} \)
+    
+    \item \(f(\tau) \text{ is always extendable} \)
+\end{enumerate}
+
+
+(1) Applying \(\tau\) to a positive map
+\[
+\begin{bmatrix}
+\tau(a_1, b_1, c_1, d_1) \\
+\tau(a_2, b_2, c_2, d_2) \\
+\tau(a_3, b_3, c_3, d_3) \\
+\tau(a_4, b_4, c_4, d_4)
+\end{bmatrix}
+\rightarrow
+\frac{1}{2} \begin{bmatrix}
+a_1 + d_1 & b_1 + c_1 & a_1 + c_1 & b_1 + d_1 \\
+a_2 + d_2 & b_2 + c_2 & a_2 + c_2 & b_2 + d_2 \\
+a_3 + d_3 & b_3 + c_3 & a_3 + c_3 & b_3 + d_3 \\
+a_4 + d_4 & b_4 + c_4 & a_4 + c_4 & b_4 + d_4
+\end{bmatrix}
+\]
+
+
+We need to find a \(t\) such that
+
+\[
+\max(-a_i - d_i, -b_i - c_i) \leq t \leq \min(a_i + c_i, b_i + d_i)
+\]
+\[
+:= L \quad \quad \quad \quad := R
+\]
+
+Using rule 3, we deduce: 
+
+\begin{align*}
+    a_i + c_i \geq 0, \\
+    a_i + d_i \geq 0 \leftrightarrow -a_i - d_i \leq 0, \\
+    b_i + c_i \geq 0 \leftrightarrow -b_i - c_i \leq 0,\\
+    b_i + d_i \geq 0
+\end{align*}
+
+Hence, the smallest possible \(R\) value is 0, and the largest possible \(L\) value is 0. Therefore, a \(t\) is always guaranteed.
+
+(2) Applying a positive map to \(\tau\)
+
+Recall our matrices are in $E^+_{2,2}$, so their construction is as follows:
+\[
+(f(1, 0, 1, 0), f(0, 1, 1, 0), f(1, 0, 0, 1), f(0, 1, 0, 1)) = (r_1, r_2, r_3, r_4)^T
+\]
+Where $r_1 + r_4 = r_2 + r_3$
+
+\[
+\tau(f) = 
+\frac{1}{2} \begin{bmatrix}
+r_1 + r_2 \\
+r_2 + r_4 \\
+r_1 + r_3 \\
+r_3 + r_4
+\end{bmatrix}
+=
+\begin{bmatrix}
+x \\
+y \\
+z \\
+w
+\end{bmatrix}
+\]
+
+Given:
+\begin{center}
+    $t \geq 0$ \\
+    $x - y + t \geq 0$ \\
+    $y - t \geq 0$ \\
+    $w - t \geq 0$
+\end{center}
+
+Rewriting the conditions:
+
+\begin{center}
+    $t \geq 0$\\
+    $\frac{1}{2}r_1 - \frac{1}{2}r_4 + t \geq 0$ \\
+    $\frac{1}{2}r_2 + \frac{1}{2}r_4 - t \geq 0$ \\
+    $\frac{1}{2}r_3 + \frac{1}{2}r_4 - t \geq 0$
+\end{center}
+
+Can we find a \( t \) that satisfies these four equations? Yes, \( t = \frac{1}{2}r_4 \).
+\end{proof}
+
+\begin{cor}
+    If an extendable matrix is multiplied by another extendable matrix, regardless of the order, the result will always be an extendable matrix.
+\end{cor}
+
+
+\begin{thm}
+    Assume \( f \) is extendable for all, meaning there exists a positive map \( \tilde{f} \) such that \( q \circ \tilde{f} = f \). We aim to show that \( f = f' \circ \tau \) for some positive map \( f' \).
+\end{thm}
+
+\begin{proof}
+    
+\end{proof}
+
+\subsection{Positivity}
+
+\begin{center}
+\begin{tikzpicture}[>=latex]
+    % Define nodes for vector spaces
+    \node (R) at (-5.5,0) {$ V^+_{small} = \left\{(a, b, c, d) :
+\begin{array}{l}
+a \geq 0, b \geq 0, c \geq 0, d \geq 0 \\
+a + b = c + d \geq 0
+\end{array}
+\right\} $}; % smaller cone
+
+    \node (R2) at (3,0) {$\left\{ (a, b, c, d) :
+\begin{array}{l}
+a + c, a + d, b + c, b + d \geq 0 \\
+a + b = c + d \geq 0
+\end{array}
+\right\} = V^+_{big}$}; % larger cone
+
+    \draw[->](R) to[bend right=30] node[midway, below] {$\tau^{-1}$} (R2) node[midway, above]{};
+    \draw[->] (R2) to[bend right=30] node[midway, above] {$\tau$} (R);
+\end{tikzpicture}
+\end{center}
+
+\begin{prop}
+    $\tau^{-1}$ sends entries in the small positive cone to the large positive cone, enlarging the smaller cone and sending all extendables outside of the cone. Hence, $\tau^{-1}$ is onto from the big cone to the small cone.
+\end{prop}
+
+\begin{proof}
+    We start with the definition of $\tau^{-1}$ and prove that $\tau^{-1}$ sends $a \geq 0, b \geq 0, c \geq 0, d \geq 0$ to $a + c, a + d, b + c, b + d \geq 0$.
+
+\[
+\tau^{-1}: (a,b,c,d) \to \left( \frac{3a - b + 3c - d}{4}, \frac{-a + 3b - c + 3d}{4}, \frac{-a + 3b + 3c - d}{4}, \frac{3a - b - c + 3d}{4} \right)
+\]
+\[
+= (a', b', c', d')
+\]
+
+\[
+a' + c' = \left( \frac{3a - b + 3c - d}{4} \right) + \quad \left( \frac{-a + 3b + 3c - d}{4} \right) = \frac{1}{4} \left( 2a + 2b + 6c - 2d \right) = \frac{a}{2} + \frac{b}{2} + \frac{3c}{2} - \frac{d}{2}.
+\]
+
+We use the first rule: $a + b = c+ d \leftrightarrow a + b - d = c$ to get:
+
+\[
+\frac{a}{2} + \frac{b}{2} + \frac{3c}{2} - \frac{d}{2} = \frac{3c}{2} + \frac{c}{2} = 2c
+\]
+
+Since we went from the smaller cone, where $c \geq 0$, we know $2c \geq 0$ must hold. Similar reasoning for $a' + d', b' + c', b' + d' \geq 0$. Hence, $\tau^{-1}$ sends entries in the smaller cone to the positive cone.
+\end{proof}
+
+\begin{cor}
+    $\tau$ is one to one.
+\end{cor}
+
+\begin{thm}
+    If $(a,b,c,d)$ are in $V^+_{big}$, then $\tau^{-1}$ sends them to $(a',b',c',d') \notin V^+$
+\end{thm}
+
+\begin{proof}
+
+We want to show that \( a' + d' \geq 0 \) doesn't hold given that $a$ is a negative number
+
+\begin{align*}
+    & a' + d' = \frac{1}{4} \left( 3a - b + 3c - d + 3a - b - c + 3d \right) = \frac{1}{2} \left( 3a - b + c + d \right) \\
+    & = \frac{1}{2} \left( 3a - b + a + b \right) = \frac{1}{2} \left( 4a \right) = 2a < 0 \text{ when } a < 0
+\end{align*} Similar reasoning for the three other inequalities. Hence, $\tau^{-1}$ sends entries in $V^+_{big}$ outside of $V^+$.
+
+\end{proof}
+
+
+\begin{tikzpicture}[scale=0.8]
+    %% middle cone
+    % Smaller cone (dashed)
+    \draw[dashed] (-4,0) -- (-3,5);
+    \draw[dashed] (-4,0) -- (-5,5);
+    \draw[dashed] (-5,5) arc[start angle=-180, end angle=180, x radius=1, y radius=0.3];
+
+    % Larger cone
+    \draw (-4,0) -- (-2,5);
+    \draw (-4,0) -- (-6,5);
+    \draw (-6,5) arc[start angle=-180, end angle=180, x radius=2, y radius=0.5];
+
+    %% right side cone
+    \draw (2,0) -- (3,5);
+    \draw (2,0) -- (1,5);
+    \draw (1,5) arc[start angle=-180, end angle=180, x radius=1, y radius=0.5];
+
+    %% left side cone
+    \draw[dashed] (-10,0) -- (-8,5);
+    \draw[dashed] (-10,0) -- (-12,5);
+    \draw[dashed] (-12,5) arc[start angle=-180, end angle=180, x radius=2, y radius=0.5];
+    
+    % Arrows bottom
+    \draw[->] (-1.75,2.25) arc[start angle=240, end angle=300, radius=1.5];
+    \draw[->] (-7.75,2.25) arc[start angle=240, end angle=300, radius=1.5];
+    \node at (-1,1.75) {$\tau^{-1}$}; % bottom right
+    \node at (-7,1.75) {$\tau^{-1}$}; % bottom left
+
+    % Arrows above
+    \draw[->] (-0.25,3.75) arc[start angle=60, end angle=120, radius=1.5];
+    \draw[->] (-6.25,3.75) arc[start angle=60, end angle=120, radius=1.5];
+    \node at (-1,4.25) {$\tau$}; % top right
+    \node at (-7,4.25) {$\tau$}; % top left
+\end{tikzpicture}
+
+Where the dashed cone satisfies $a_i, b_i, c_i, d_i \geq 0$ and the filled cone satisfies $a_i + c_i, b_i + c_i, a_i + c_i, b_i + d_i \geq 0$. We can see here that $\tau$ enlarges the small cone to the big cone and $\tau^{-1}$ dwindles the big cone to the size of the small cone.
+
+\section{Mutations}
+
+A mutation is a combination of applying untangling and tangling mappings to the positive mapping and observing the properties of the result. We will explore several different mutations throughout:
+\subsection{regular mutations}
+\begin{enumerate}
+    \item \(\tau  f  \tau^{-1}\) -- all values are positive if f is extendable. Always extendable? always in small cone?
+    \item \(\tau^{-1} f \tau\) -- Always extendable? always in small cone?
+\end{enumerate}
+
+\subsection{$\tau$ sandwiches}
+These are any combinations of \(f,\tau, \text{ or } \tau^{-1}\) that are sandwiched between two tau's. These always extend!
+\begin{enumerate}
+    \item \(\tau f \tau\)
+    \item \(\tau (\tau^{-1} f) \tau\)
+    \item \(\tau (\tau^{-1} f \tau^{-1})\tau\)
+    \item Are these the "basis" combinations? If not, try to find the bases and prove all combinations stem from them.
+\end{enumerate}
+
+\subsection{mutations with $\tau^{-1}$}
+\begin{enumerate}
+    \item $\tau^{-1}f\tau^{-1}$ -- 
+    \item $\tau^{-1}\tau^{-1}f$ -- 
+    \item $f\tau^{-1}\tau^{-1}$ -- 
+\end{enumerate}
+
+\begin{question}
+    Is it possible to make anything nonextendable?
+\end{question}
+
+\begin{enumerate}
+    \item Is there a limit to how often we can apply tau or tau inverse until the mapping is consistently the same? Yes, kinda! At least for tau, since it's always averaging, it will always eventually come to an average among all the values
+    \item keep looking into more mutations, find the limits of tau inverses and taus. Are somethings always nonextendable no matter what we do? if so, what are their traits?
+    \item moreover, Are somethings always extendable no matter what we do? if so, what are their traits?
+\end{enumerate}
+
+\section{Properties of Extensions and their classifiers}
+
+\begin{thm}
+    If every element is non-negative, then the mapping is extendable.
+\end{thm}
+\begin{proof}
+We start by assuming that 
+\[
+(a_i + t_i, b_i + t_i, c_i - t_i, d_i - t_i)
+\]
+\[
+\geq 0 \quad \geq 0 \quad \geq 0 \quad \geq 0 
+\]
+
+where t is a value we want to find that satisfies the condition below: 
+
+\[
+\Rightarrow -a_i, - b_i \le t_i \le c_i, d_i
+\]
+\[
+\Rightarrow \max(-a_i, - b_i) \le t_i \le \min(c_i, d_i)
+\]
+
+If we can find such a t, then the mapping is extendable. Since \(a_i, b_i, c_i, \text{ and } d_i\) are positive,  we have two possibilities:
+
+\begin{enumerate}
+    \item \(\max(-a_i, - b_i) = \min(c_i, d_i)\) which can only happen if 
+    \[
+    a_i = b_i = c_i = d_i = 0, \text{ guaranteeing a value of } t = 0
+    \]
+    \item \(\max(-a_i, - b_i) < \min(c_i, d_i)\). Let \(\max(-a_i, - b_i) = l_i\) and \(\min(c_i, d_i) = r_i\), then
+    \[
+    l_i < t < r_i, \text{ guarantees a value for } t
+    \]
+\end{enumerate}
+\end{proof}
+
+Note that although every value in a mapping being positive implies that it's extendable doesn't mean that every extendable mapping is positive.
+
+Having all positive values in each row eliminates any ambiguity regarding the validity of the inequality 
+\[
+\max(-a_i, -b_i) \leq t \leq \min(c_i, d_i).
+\]
+For instance, if we set \(a = -3\), \(b = -4\), \(c = 2\), and \(d = 1\), the inequality yields \(4 \leq t \leq 1\), which is impossible. In contrast, if we choose \(a = -1\), \(b = 1\), \(c = 2\), and \(d = 1\), the inequality holds true. This leads us to the following corollary:
+
+\begin{cor}
+    No nonextendable mapping is nonnegative
+\end{cor}
+
+In other words, every nonextendable map must include at least one negative value. If the mapping is nonextendable, then the inequality 
+\[
+\max(-a_i, -b_i) \leq t \leq \min(c_i, d_i)
+\]
+does not hold. We have demonstrated that this constraint is satisfied when all values are positive, which implies that the presence of at least one negative number is necessary to violate this condition.
+
+
+\subsection{Classifier Verification}
+
+A classifier is a mapping that can distinguish between extendable and nonextendables when it's applied to them. We used an SVM to construct classifiers such that the dot product of the classifier with an extendable is non-positive. A test is used to verify whether a classifier is true. First, we start with the inequality:
+\[
+Xa + Yb + Zc + Wd \leq 0
+\]
+
+where \(x,y,z, w\) are the row values of the classifier and \(a,b,c, d\) are the row values of the positive mapping. In other words, this is the dot product of the classifier and extendable mapping. 
+
+In our code, a matrix is extendable if its dot product with the classifier is less than or equal to 0. We're starting with an assumption that the matrix is extendable.
+
+Next, using the first rule, we transform the inequality into:
+\[
+xa + yb + zc + w(a + b - c) \leq 0
+\]
+
+Before we continue, it is important to utilize the fact that most of the mappings (regardless of extendability) have a negative value somewhere in the matrix. Hence, we can assume a is negative without loss of generality. After simplifying, we get:
+\[
+-(x + w)a + (y + w)b + (z - w)c \leq 0
+\]
+
+We then utilize the second rule, specifically, \(-a_i \leq c_i\) and the inequality becomes:
+\[
+(y + w)b + (z + x)c \leq 0
+\]
+
+For classifiers, \(y + w = z + x\), because of how they are created. Hence, we can denote \(y + w = n\) and arrive at:
+\[
+n(b + c) \leq 0
+\]
+
+Finally, by rule 3 we know \(b + c \geq 0\). We conclude that the inequality holds when:
+\[
+n \leq 0
+\]
+
+It is important to note that just because a classifier doesn't satisfy a constraint doesn't mean it's not a true classifier. All this test can say is a classifier is true if it passes a condition, and inconclusive if it doesn't. This constraint only satisfies roughly 55\% of classifiers.
+
+\begin{question}
+    Are there other classifier constraints? If so, what's the minimum number of constraints needed to determine if anything is a classifier?
+\end{question}
+\begin{question}
+    Can we find classifiers that don't overlap?
+\end{question}
+
+
+\section{Positive Cones from Graphs}
+
+\section{Practical Implications}
+
+The results of this research have profound implications across several fields, particularly in 
+\textit{optimization}, \textit{quantum information theory}, and \textit{functional analysis}, with potential applications in machine learning and engineering.
+
+Positive mappings and their extensions are pivotal in optimization problems involving positivity constraints, such as linear programming, semidefinite programming, and cone optimization. The study of positive mappings over cones, such as \( P_{2,2} \), provides a robust framework for addressing constraints that define feasible regions in optimization problems. This is critical in scenarios where solutions must remain within specific regions. Furthermore, the ability to extend positive maps ensures that partial solutions, defined on subspaces, can be expanded into global solutions, a capability highly relevant for iterative optimization methods. Applications in economics and game theory also benefit from these insights, as utility functions or payoff matrices often operate under positivity constraints, improving methods for analysis and solution generation.
+
+In quantum information theory, positive mappings and their extensions are foundational, especially in the study of separability, entanglement, and quantum operations. For instance, the untangling map \( \tau \) addresses the challenge of determining whether a quantum state can be decomposed into separable components. By ensuring the extension of positive maps, the research guarantees that certain quantum states can be represented in higher-dimensional spaces while maintaining physical constraints. Completely positive maps, which describe quantum operations such as measurements and state evolutions, also benefit from these findings, providing insights into when and how these maps can be extended while preserving complete positivity. Additionally, the potential application of these extensions in quantum error correction opens pathways for constructing error-correcting codes that respect positivity constraints, mapping noisy subspaces into error-free states.
+
+This research also advances the understanding of positive mappings in ordered vector spaces, a key area of functional analysis. Ordered vector spaces frequently appear in spectral theory, where the positivity of eigenvalues is essential. The results contribute to identifying when linear transformations preserve or extend positivity. Moreover, the lifting and extension framework developed can be applied to problems involving bounded linear operators on Banach spaces, particularly in cases involving quotient structures.
+
+Although not the primary focus, the findings also have potential applications in machine learning. For example, the use of support vector machines (SVMs) to distinguish extendable from non-extendable mappings could inspire innovative approaches to handling data constrained by cone-like structures. Additionally, in domains such as reinforcement learning or game theory, where positivity is inherent (e.g., rewards or probabilities), these methods could assist in feature transformations or dimensionality reduction while preserving critical problem constraints.
+
+Beyond optimization and quantum information theory, this research has broader applications in various scientific and engineering domains. In control theory, for instance, many systems require mappings that preserve positivity, such as probabilities in stochastic systems, and these results could be applied to ensure stability and feasibility. In data science, understanding when positive mappings can be extended may aid in imputing missing data while maintaining positivity, particularly in financial or climate datasets. Finally, in physics and materials science, positive mappings play a role in modeling physical phenomena such as energy distributions or stress tensors, and the developed framework could ensure physical consistency when extending or transforming these models.
+
+
+
+\section{Acknowledgments}
+
+This project was generously funded by the National Science Foundation (NSF). The project was led and supervised by Professor Thomas Sinclair, whose invaluable guidance shaped its direction and helped us when we were stuck. Karim and Darshini contributed both to the writing of the paper and the development of key portions of the code. Luke was the lead programmer, developing the core code that enabled us to test our hypotheses and drive the project forward.
+
+\end{document}

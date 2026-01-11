@@ -1,0 +1,299 @@
+%\documentclass{article} %%%
+\documentclass[11pt]{amsart} %%%
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath, amssymb, tikz}
+\usetikzlibrary{arrows}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage{enumitem} % for customizing enumerate environments
+
+\usepackage{mathtools}
+%\usepackage{tgpagella}
+%\usepackage{eulervm}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage[hidelinks]{hyperref}
+\usepackage[marginpar=2.5cm]{geometry}
+\usepackage{xcolor}\usepackage{marginnote}
+\usepackage{amsrefs}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{main}{Theorem}
+\newtheorem{mconj}[main]{Conjecture}
+\newtheorem{mcor}[main]{Corollary}
+\renewcommand{\themain}{\Alph{main}}
+%\newtheorem{thm}{Theorem}[subsection]
+\newtheorem*{thm*}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{fact}[thm]{Fact}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem*{prop*}{Proposition}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem*{princ}{Principle}
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{notation}[thm]{Notation}
+\newtheorem{remark}[thm]{Remark}
+\newtheorem{exercise}[thm]{Exercise}
+\newtheorem{question}[thm]{Question}
+\newtheorem{problem}[thm]{Problem}
+\newtheorem{example}[thm]{Example}
+\newtheorem{claim}[thm]{Claim}
+\newtheorem{subclaim}[thm]{Subclaim}
+
+%\newcommand{\REMARKNORMAL}[1]{\normalmarginpar\marginnote{\tt #1}}
+\textwidth 5.50in
+\oddsidemargin 0.375in
+\evensidemargin 0.375in
+
+\title[Farkas' Lemma \& Hyperplane Separation]{An Elementary Approach to Farkas' Lemma and its Relation to Hyperplane Separation}
+\author[El-Sharkawy, Rajamani, Sinclair]{Karim El-Sharkawy \& Darshini Rajamani \\ Professor Thomas Sinclair}
+\date{August 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+Farkas' Lemma is a fundamental result in linear programming and optimization. It states that given a matrix \( A \in \mathbb{R}^{m \times n} \) and a vector \( b \in \mathbb{R}^m \), exactly one of the following two statements is true:
+
+\begin{enumerate}
+    \item There exists a vector \( x \in \mathbb{R}^n \) such that \( Ax = b \) and \( x \geq 0 \).
+    \subitem Where \( x \geq 0 \) means \(\forall x_i \in x, x_i \geq 0 \)
+    \item There exists a vector \( y \in \mathbb{R}^m \) such that \( A^T y \ge 0 \) and \( b^T y < 0 \).
+\end{enumerate}
+
+We aim to establish Farkas' Lemma using basic linear algebra. Existing proofs utilizing analysis, linear programming, and Fourier-Motzkin Elimination are complex and challenging for undergraduates to grasp, thereby limiting accessibility for students conducting research using optimization or linear programming.
+
+\begin{defn}
+    A set \( K \subseteq \mathbb{R}^n \) is a cone if 
+
+\begin{enumerate}
+    \item \( x \in K \) implies \( \alpha x \in K \) for any scalar \( \alpha \geq 0 \)
+    \item for all $x,y\in K$, $x + y\in K$
+\end{enumerate}
+\end{defn}
+
+\begin{defn} Given a set \( S \), the conic hull of \( S \), denoted by \(\text{cone}(S)\), is the set of all conic combinations of the points in \( S \), that is,
+\[
+\text{cone}(S) = \left\{ \sum_{i=1}^n \alpha_i x_i \mid \alpha_i \geq 0, \ x_i \in S \right\}.
+\]\\
+\end{defn}
+
+\begin{prop}
+    \({cone(S)}\) is convex.
+\end{prop}
+
+\begin{proof}
+Let \( x, y \in \text{cone}(S) \). Then there exist non-negative scalars \( \alpha_i, \beta_i \) such that:
+\[
+x = \sum_{i=1}^n \alpha_i a_i, \quad y = \sum_{i=1}^n \beta_i a_i
+\]
+For any \( \lambda \in [0, 1] \), consider:
+\[
+\lambda x + (1 - \lambda) y = \lambda \sum_{i=1}^n \alpha_i a_i + (1 - \lambda) \sum_{i=1}^n \beta_i a_i = \sum_{i=1}^n (\lambda \alpha_i + (1 - \lambda) \beta_i) a_i
+\]
+Since \( \lambda \alpha_i + (1 - \lambda) \beta_i \geq 0 \) for all \( i \), it follows that \( \lambda x + (1 - \lambda) y \in \text{cone}(S) \). Thus, \(\text{cone}(S)\) is convex.\\
+\end{proof}
+
+\begin{prop}
+    \({cone(S)}\) is closed.
+\end{prop}
+\begin{proof}
+Consider a sequence \( \{z_k\} \) in \(\text{cone}(S)\) that converges to a point \( \bar{z} \). Each \( z_k \) can be written as:
+\[
+z_k = \sum_{i=1}^n \alpha_{(k)} a_i \quad \text{with} \quad \alpha_{(k)} \geq 0
+\]
+We need to show that \( \bar{z} \in \text{cone}(S) \). To establish this, we introduce the following linear program:
+\[
+\begin{aligned}
+\min_{\alpha, z} & \quad \|z - \bar{z}\|_\infty \\
+\text{s.t.} & \quad \sum_{i=1}^n \alpha_i a_i = z, \\
+& \quad \alpha_i \geq 0
+\end{aligned}
+\]
+
+Since \( z_k \in \text{cone}(S) \), the objective function \( \|z - \bar{z}\|_\infty \) is non-negative, and the sequence converges to \( \bar{z} \). As the sequence converges, \( \| z_k - z_{k-1} \| \to 0 \), ensuring that \( \| z_k - \bar{z} \| \to 0 \) as \( k \to \infty \). Therefore, the limit point \( \bar{z} \) must lie within the conic hull, confirming its closedness.\\
+
+Using the triangle inequality, for each sequence element \( z_k \), we have:
+\[
+\| z_k - \bar{z} \| \leq \| z_k - z_{k-1} \| + \| z_{k-1} - \bar{z} \|.
+\]
+As \( k \to \infty \), the distances \( \| z_k - z_{k-1} \| \) tend to zero, implying that \( \| z_k - \bar{z} \| \to 0 \). Therefore, the limit point \( \bar{z} \) lies within the conic hull, confirming that \( \text{cone}(S) \) is closed.
+\end{proof}
+
+\begin{defn} A halfspace in a vector space \( V \) is one of the two parts into which a hyperplane divides the space. More formally, given a nonzero vector \( a \in V \) and a scalar \( b \), the halfspaces associated with the hyperplane \( \{ y \in V \mid a^T y = b \} \) are defined as:
+\[
+\mathcal{H}_- = \{ y \in V \mid a^T y \leq b \}
+\]
+\[
+\mathcal{H}_+ = \{ y \in V \mid a^T y \geq b \}
+\]
+These represent the sets of all points on one side of the hyperplane, either satisfying the inequality \( a^T y \leq b \) or \( a^T y \geq b \).
+\end{defn}
+
+\begin{defn} A hyperplane \(\partial \mathcal{H}\) of a vector space $V$ of $\dim n$ is a subspace of $V$ of \(dim (n-1)\). They can be described as the intersection of half-spaces:
+
+\[
+\partial \mathcal{H} = \mathcal{H}_- \cap \mathcal{H}_+ = \{ y \mid a^T y \leq b, \, a^T y \geq b \} = \{ y \mid a^T y = b \}
+\]
+
+\begin{center}
+    Where \(\mathcal{H}_-\) and \(\mathcal{H}_+\) are halfspaces
+\end{center}
+
+
+A hyperplane is the solution set of a single linear equation of the form $a \cdot x = b$, where \(a \in V\) is a nonzero, normal vector to \(\partial \mathcal{H}\), ${x}$ is a vector variable in $V$, and $b$ is a constant.
+\end{defn}
+
+
+
+\section{Separating Hyperplane Theorem}
+\begin{thm}
+    Let $C$ and $D$ be two convex sets in $\mathbb{R}^n$ that do not intersect ($i.e., C$ $\cap$ $D$ = $\emptyset$). 
+Then, there exists $a$ $\in$ $\mathbb{R}^n$ where $a$ $\neq$ 0, and $b$ $\in \mathbb{R}$, such that:
+\begin{align*}
+    a^T x &\leq b \quad \forall x \in C, \\
+    a^T x &\geq b \quad \forall x \in D.
+\end{align*}
+\end{thm}
+
+\textbf{Note:} The hyperplane \( a^T x = b \) with normal vector \( a \) separates the sets \( C \) and \( D \).\\
+
+We note that neither inequality in the conclusion of Theorem 2.1 can be made strict. Strict separation may not always be possible, even when both \( C \) and \( D \) are closed. (An example could be added here to illustrate this point.) However, if both sets are closed and at least one of them is compact, then the separation can be strict, as stated in the following theorem:\\
+
+\begin{thm}
+    Let \( C \) and \( D \) be two closed convex sets in \(\mathbb{R}^n\) with at least one of them bounded, and assume \( C \cap D = \emptyset \). Then there exist \( a \in \mathbb{R}^n \), \( a \neq 0 \), and \( b \in \mathbb{R} \) such that:
+\begin{align*}
+    a^T x &> b \quad \forall x \in D, \\
+    a^T x &< b \quad \forall x \in C.
+\end{align*}
+\end{thm}
+
+\begin{cor}
+    Let \( C \subseteq \mathbb{R}^n \) be a closed convex set and \( x \in \mathbb{R}^n \) a point not in \( C \). Then \( x \) and \( C \) can be strictly separated by a hyperplane.\\
+\end{cor}
+
+Consider the set \( D = \{x\} \), which is trivially a closed convex set and is bounded. Since \( x \notin C \), we have \( C \cap D = \emptyset \). By Theorem 2.2, there exist \( a \in \mathbb{R}^n \), \( a \neq 0 \), and \( b \in \mathbb{R} \) such that:
+\begin{align*}
+    a^T y &> b \quad \forall y \in D, \\
+    a^T z &< b \quad \forall z \in C.
+\end{align*}
+Since \( D = \{x\} \), the first condition simplifies to \( a^T x > b \). Hence, the hyperplane \( a^T z = b \) strictly separates the point \( x \) from the set \( C \).\\
+
+\section{Farkas Lemma}
+
+\begin{lem}
+    Let \( A \in \mathbb{R}^{m \times n} \) and \( b \in \mathbb{R}^m \). Then exactly one of the following statements is true:
+\begin{enumerate}
+    \item There exists \( x \in \mathbb{R}^n \) such that \( Ax = b \) and \( x \geq 0 \).
+    \item There exists \( y \in \mathbb{R}^m \) such that \( A^T y \ge 0 \) and \( b^T y < 0 \).
+\end{enumerate}
+\end{lem}
+
+\begin{proof} \textit{1 \(\xrightarrow{}\) not 2}
+
+This will be a proof by contradiction. Suppose there exist \( x \in \mathbb{R}^n \) such that \( Ax = b \) and \( x \geq 0 \). Also, suppose there exist \( y \in \mathbb{R}^m \) such that \( A^T y \geq 0 \) and \( b^T y < 0 \).\\
+
+Since \( Ax = b \),
+\[
+(Ax)^T = b^T
+\]
+\[
+x^T A^T = b^T
+\]
+\[
+x^T A^T y = b^T y
+\]
+
+Since \( x \geq 0 \) and \( A^T y \geq 0 \), we know \( x^T A^T y \geq 0 \).\\
+
+However, we assumed \( b^T y < 0 \), leading to a contradiction.\\
+
+Therefore, if there exists \( x \in \mathbb{R}^n \) such that \( Ax = b \) and \( x \geq 0 \), then there cannot exist \( y \in \mathbb{R}^m \) such that \( A^T y \geq 0 \) and \( b^T y < 0 \).
+
+\end{proof}
+
+\begin{proof} \textit{2 \(\xrightarrow{}\) not 1}
+
+Suppose there exists \( y \in \mathbb{R}^m \) such that \( A^T y \geq 0 \) and \( b^T y < 0 \).\\
+
+Now, let \( a_1, \ldots, a_n \) be the columns of matrix \( A \). Define the set \( S = \{a_1, \ldots, a_n\} \). The conic hull of \( S \), denoted by \(\text{cone}(S)\), is convex (as established earlier). Furthermore, we assert that \(\text{cone}(S)\) is closed (see Definition 1.1). 
+
+Now we may use the hyperplane separation. Given that \( b \notin C \) by the assumption that the first condition is infeasible. By Corollary 1, the point \( b \) and the set \( C \) can be strictly separated; i.e., there exist \( y \in \mathbb{R}^m \), \( y \neq 0 \), and \( r \in \mathbb{R} \) such that:
+\[
+y^T z \geq r \quad \forall z \in C \quad \text{and} \quad y^T b < r.
+\]
+Since \( 0 \in C \), we must have \( r \leq 0 \). If \( r < 0 \), then there exists some \( z \in \text{cone}(S) \) such that \( y^T z < 0 \). 
+
+Since \( \text{cone}(S) \) is a cone, for any \(\alpha \geq 0\), \(\alpha z \in \text{cone}(S)\). Therefore, \( y^T (\alpha z) = \alpha y^T z \). If \( y^T z < 0 \), then \( y^T (\alpha z) = \alpha y^T z \) can be made arbitrarily negative by choosing a sufficiently large \(\alpha\). This contradicts the assumption that \( y^T z \geq r \geq 0 \) for all \( z \in \text{cone}(S) \).\\
+
+Thus, \( r \) cannot be less than zero, so \( r \) must be zero. The new condition becomes:
+\[
+y^T z \geq 0 \quad \forall z \in C \quad \text{and} \quad y^T b < 0.
+\]
+Since \( \{a_1, \ldots, a_n\} \subseteq C \), we see that \( A^T y \geq 0 \).\\
+
+Therefore, if there exists \( y \in \mathbb{R}^m \) such that \( A^T y \geq 0 \) and \( b^T y < 0 \), then there cannot exist \( x \in \mathbb{R}^n \) such that \( Ax = b \) and \( x \geq 0 \).\\
+
+\end{proof}
+
+\subsection{Connection to Hyperplane Separation Theorem}
+
+We will now understand Farkas' lemma in the light of The Hyperplane Separation Theorem. Consider the set: \(C = \{ Ax \mid x \geq 0 \}\), a convex cone, which we will denote by a semi-circle, as if you're looking top-down:
+
+\begin{center}
+\begin{tikzpicture}
+
+% Adding the points on the parabola
+\filldraw[black] (-.2, 1) circle (2pt) node[right] {$y_1$};
+\filldraw[black] (-0.15, -0.5) circle (2pt) node[right] {$y_2$};
+\filldraw[black] (-.4, 0.25) circle (2pt) node[right] {$P(x)$};
+
+% Adding the arrows
+\draw[black, ->, thin] (-2, 0.25) -- (-.25, -0.5); % y2
+\draw[black, ->, thin] (-2, 0.25) -- (-.3, 1); % y1
+\draw[red, <-, thick] (-2, 0.25) -- (-0.5, 0.25); % to P(x)
+
+% Adding the y-axis
+\draw[black, thick, dashed] (-1.25, -1) -- (-1.25, 1.25);
+\node[left] at (-2, 0.25) {$y$};
+
+% Adding the partial derivative symbol
+\node[purple, thick] at (-1.25, 1.5) {$\partial \mathcal{H}$};
+
+\draw (.25,1.5) arc[start angle=125, end angle=235, radius=1.5];
+
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+    Where \(y\) is a point outside of \(C\), \(P(x) \in C\) is the closest point to \(y\), and \(\partial \mathcal{H}\) is the hyperplane created by \(P(x)\)
+\end{center}
+
+The existence of \(P(x)\) follows from Weierstrass' Theorem, which asserts that optimization problems in Euclidean space with bounded and compact sets must attain their minimum or maximum values. To find \(P(x)\), we want to minimize \(\|y - x\|^2\) where \(x \in C\) and the minimum is attained at \(x = P(x)\).
+
+We denote the red vector by \(\eta_x = y - P(x)\). Since \(P(x)\) is the point in \(C\) closest to \(y\), the vector \(\eta_x = y - P(x)\) is perpendicular to the boundary of \(C\) at \(P(x)\). This means \(\eta_x\) is normal to \(\partial \mathcal{H}\) at \(P(x)\), which we may now define as:
+    \[
+    \partial \mathcal{H} = \{ z \in V \mid \langle \eta_x, z - P(x) \rangle = 0 \}, 
+    \mathcal{H}_- = \{ z \in V \mid \langle \eta_x, z \rangle \leq \langle \eta_x, P(x) \rangle = 0 \}.
+    \]
+Since \(\eta_x\) points outward from \(C\) towards \(y\), \(\mathcal{H}_-\) represents the half-space containing \(y\). Hence, \(\eta_x = y - P(x)\) is outward normal with respect to \(\mathcal{H}_-\), as it satisfies \(\langle \eta_x, P(x) \rangle = 0\) and points away from \(C\). By extension, \(\eta_x\) is inward-normal with respect to \(\mathcal{H}_+\). \(\partial \mathcal{H}\) is the hyperplane created by \(\eta_x\): \(\langle \eta_x, P(x) \rangle = 0\). \(y\) lies in \(\mathcal{H}_-:= \langle \eta_x, P(x) \rangle \leq 0\).
+
+The cone \(C\) is defined as follows:
+\[
+C = \bigcap_{\mathcal{H}_+ \subseteq \mathbb{C}}^\infty \mathcal{H}_+
+\]
+This implies \(C\) is composed of half-spaces. Moreover, by its definition, \(\partial \mathcal{H} = \mathcal{H}_- \cap \mathcal{H}_+\). Hence, \(\partial \mathcal{H}\) can only intersect \(C\) at its border.
+
+Contextualizing everything together, we can understand farkas' lemma as:
+
+\begin{center}
+    If \(b \in cone(A)\), then there's an \(x\) such that, \( A x = b\). If \(b \notin cone(A)\), then there exists a vector \( y \) such that \( A^T y = b\).
+\end{center}
+
+This concludes our comprehension of Farkas' lemma in the context of hyperplanes.
+
+\end{document}
